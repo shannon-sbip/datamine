@@ -60,7 +60,7 @@ By using Planet Scale database service, there is 5GB of storage available in the
 * 5,000,000 KB / 15 KB = ~300,000 days = __~925 years__ sustained usage
 
 ### __System Architecture__
-<img src="./doc/system-architecture.png" alt="system-architecture" width="400"/>
+<img src="./doc/system-architecture.png" alt="system-architecture" width="1000"/>
 
 ### Data Scientist Flow
 
