@@ -33,7 +33,7 @@ describe("/login", () => {
           password: process.env.SEAL_PASSWORD
         });
         expect(postEmail).toHaveBeenCalled();
-        expect(status).toHaveBeenCalledWith(200);
+        expect(status).toHaveBeenCalledWith(201);
       });
     });
   });
