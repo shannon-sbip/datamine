@@ -1,6 +1,8 @@
+import { sealData } from "iron-session";
 import loginApi from "../../../pages/api/v1/login";
 import postEmail from "../../../lib/postEmail";
 import { USER_ACTIVE } from "./constants";
+jest.mock("iron-session");
 jest.mock("../../../lib/postEmail");
 describe("/login", () => {
   let status: {};
@@ -24,6 +26,12 @@ describe("/login", () => {
         };
         // @ts-ignore
         await loginApi(req, res);
+        expect(sealData).toHaveBeenCalledWith({
+          eventId: USER_ACTIVE.id,
+          userId: USER_ACTIVE.userId
+        }, {
+          password: process.env.SEAL_PASSWORD
+        });
         expect(postEmail).toHaveBeenCalled();
         expect(status).toHaveBeenCalledWith(200);
       });

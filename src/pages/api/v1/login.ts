@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { sealData } from "iron-session";
 import type { NextApiRequest, NextApiResponse } from "next";
 import postEmail from "../../../lib/postEmail";
 import { withSessionRoute } from "../../../lib/withIronSession";
@@ -29,7 +30,20 @@ const handler = async (
     res.status(404).json({ message: "No such user." });
     return;
   }
-  postEmail();
+  const seal = await sealData({
+    userId: currentUser.userId,
+    eventId: currentUser.id
+  }, {
+    password: process.env.SEAL_PASSWORD || ""
+  });
+  postEmail(
+    {
+      email: currentUser.email,
+      subject: "Magic Link",
+      // eslint-disable-next-line max-len
+      Body: `Hey there ${currentUser.name}, <a href="${process.env.NEXT_PUBLIC_APP_URL}/api/v1/login?seal=${seal}">click here to login</a>.`
+    }
+  );
   res.status(200).json({ message: `Magic Link has been sent to ${currentUser.email}` });
 };
 export default withSessionRoute(handler);
