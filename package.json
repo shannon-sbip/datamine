@@ -1,8 +1,9 @@
 {
-  "name": "a2",
-  "version": "0.1.1667871560473",
+  "name": "datamine",
+  "version": "0.1.1667883389106",
   "private": true,
   "scripts": {
+    "prepare": "yarn db:reset",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

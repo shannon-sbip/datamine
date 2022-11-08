@@ -8,7 +8,7 @@ CREATE TABLE "UserEvent" (
     "affilation" TEXT NOT NULL,
     "maxDownloadCount" INTEGER NOT NULL,
     "validFrom" DATETIME NOT NULL,
-    "ValidTo" DATETIME NOT NULL,
+    "validTo" DATETIME NOT NULL,
     "isActive" BOOLEAN,
     "isAdmin" BOOLEAN
 );

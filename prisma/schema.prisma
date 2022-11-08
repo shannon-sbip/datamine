@@ -14,7 +14,7 @@ model UserEvent {
   affilation        String
   maxDownloadCount  Int
   validFrom         DateTime
-  ValidTo           DateTime
+  validTo           DateTime
   isActive          Boolean?
   isAdmin           Boolean?
 }
