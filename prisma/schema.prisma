@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+model UserEvent {
+  id                String      @id @default(cuid())
+  userId            String      @default(cuid())
+  createdAt         DateTime    @default(now())
+  email             String     
+  name              String
+  affilation        String
+  maxDownloadCount  Int
+  validFrom         DateTime
+  ValidTo           DateTime
+  isActive          Boolean?
+  isAdmin           Boolean?
+}
+model DownloadEvent {
+  id                String      @id @default(cuid())
+  userId            String      @default(cuid())
+  createdAt         DateTime    @default(now())
+}

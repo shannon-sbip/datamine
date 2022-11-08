@@ -1,0 +1,73 @@
+{
+    "env": {
+        "browser": true,
+        "jest": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb",
+        "next/core-web-vitals"
+    ],
+    "rules": {
+        "react/function-component-definition": [
+            2,
+            {
+                "namedComponents": "arrow-function"
+            }
+        ],
+        "no-use-before-define": "error",
+        "react/jsx-filename-extension": [
+            "off",
+            {
+                "extensions": [
+                    ".svg"
+                ]
+            }
+        ],
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "prefer-arrow-callback": [
+            "error",
+            {
+                "allowUnboundThis": false
+            }
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "complexity": [
+            "warn",
+            20
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "max-len": [
+            "warn",
+            {
+                "code": 120
+            }
+        ],
+        "import/newline-after-import": "off",
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 0
+            }
+        ],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "import/prefer-default-export": "off",
+        "react/prop-types": "off",
+        "jest/valid-title": "off",
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.{js,ts,jsx,tsx}", "**/*.spec.{js,ts,jsx,tsx}"]}]
+    }
+}

@@ -26,8 +26,8 @@ The domain of __```Datamine```__ is as follows:
 
 | Events        | Objects       | Transactions
 | ---           | ---           | ---
-| UserUpdated   | User          | UpdateUser
-| Download      | -             | DownloadDataset
+| UserEvent     | User          | UpdateUser
+| DownloadEvent | -             | DownloadDataset
 
 The datasets are uploaded in an out-of-band manner by system administrators and is not within the scope of this project.
 
@@ -50,7 +50,7 @@ The endpoinds are derived from the needs of the personas identified in the _Stra
 * __Int__: 4 bytes
 * __Char__: 2 byte * size
 * __Bool__: 1 byte
-* __UserUpdatedEvent__: (32 bytes * 2 * 4) + (4 bytes * 4) + 2 bytes = 274 bytes
+* __UserEvent__: (32 bytes * 2 * 4) + (4 bytes * 4) + 2 bytes = 274 bytes
 * __DownloadEvent__: (32 bytes * 2 * 2) + 4 bytes = 132 bytes
 
 Assuming _100_ user updates per day, the database growth rate can be calculated as follows:

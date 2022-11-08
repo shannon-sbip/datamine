@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "id": "cl8zfkhhr0000xttp629ors65",
+      "userId": "cl8zfkhhr0003xttpxvsd237k",
+      "email": "admin@example.com",
+      "name": "admin",
+      "affilation": "affilation1",
+      "maxDownloadCount": 1,
+      "validFrom": 1667870996000,
+      "validTo": 1667870996000,
+      "isAdmin": true,
+      "isActive": true
+    },
+    {
+      "id": "cl8zfkhhr0004xttpi2aei3ul",
+      "userId": "cl8zfkhhr0002xttprfz4zeeb",
+      "email": "user_active@example.com",
+      "name": "user_active",
+      "affilation": "affilation1",
+      "maxDownloadCount": 1,
+      "validFrom": 1667870996000,
+      "validTo": 1667870996000,
+      "isAdmin": false,
+      "isActive": true
+    },
+    {
+      "id": "cl8zfkhhr0004xttpi2aei3uz",
+      "userId": "cl8zfkhhr0002xttprfz4zeeb",
+      "email": "user_active@example.com",
+      "name": "user_active",
+      "affilation": "affilation1",
+      "maxDownloadCount": 1,
+      "validFrom": 1667870996000,
+      "validTo": 1667870996000,
+      "isAdmin": false,
+      "isActive": true
+    },
+    {
+      "id": "cl8zfkhhr0001xttpdyzkw8kr",
+      "userId": "cl8zfkhhr0005xttpz4nue2b9",
+      "email": "user_inactive@example.com",
+      "name": "user_inactive",
+      "affilation": "affilation1",
+      "maxDownloadCount": 1,
+      "validFrom": 1667870996000,
+      "validTo": 1667870996000,
+      "isAdmin": false,
+      "isActive": false
+    }
+  ]
+}
