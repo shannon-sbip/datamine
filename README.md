@@ -128,7 +128,7 @@ __A8__: System validates the download request.
 
 __A9__: System generates a short-lived pre-signed S3 URL.
 
-__A10__: System generates a new UserUpdatedEvent, updating the download count.
+__A10__: System generates a new DownloadEvent, updating the download count.
 
 __A11__: System forwards the pre-signed S3 URL to the user.
 
