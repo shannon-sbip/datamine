@@ -1,6 +1,6 @@
 {
   "name": "datamine",
-  "version": "0.1.1667894080448",
+  "version": "0.1.1667895837108",
   "private": true,
   "scripts": {
     "prepare": "yarn db:reset",
