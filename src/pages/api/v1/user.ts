@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { unsealData } from "iron-session";
 import type { NextApiRequest, NextApiResponse } from "next";
+import getUnsealedData from "../../../lib/getUnsealedData";
+import getUserEventFromDbByUserId from "../../../lib/getUserEventFromDbByUserId";
 import { withSessionRoute } from "../../../lib/withIronSession";
 import { User } from "../../../types/user";
 type Data = {
@@ -19,19 +20,8 @@ const handler = async (
     return;
   }
   try {
-    const { userId, eventId } = (
-        await unsealData(userSeal, { password: process.env.SEAL_PASSWORD || "" }) || {}
-      ) as { userId: string, eventId: string};
-    const currentUser = await prisma.userEvent.findFirst({
-      where: {
-        userId: {
-          equals: userId
-        }
-      },
-      orderBy: {
-        createdAt: "desc"
-      }
-    });
+    const { userId, eventId } = await getUnsealedData(userSeal);
+    const currentUser = await getUserEventFromDbByUserId(prisma, userId);
     if (!currentUser || currentUser.id !== eventId) {
       res.status(404).json({ message: "Seal is invalid. Please generate a new magic link." });
       return;

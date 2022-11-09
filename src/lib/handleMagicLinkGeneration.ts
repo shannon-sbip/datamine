@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { sealData } from "iron-session";
 import { NextApiRequest, NextApiResponse } from "next";
+import getUserEventFromDbByEmail from "./getUserEventFromDbByEmail";
 import postEmail from "./postEmail";
 type HandleMagicLinkGenerationArgs = {
     prisma: PrismaClient,
@@ -17,16 +18,7 @@ const handleMagicLinkGeneration = async ({
     res.status(400).json({ message: "Invalid login request." });
     return;
   }
-  const currentUser = await prisma.userEvent.findFirst({
-    where: {
-      email: {
-        equals: email as string
-      }
-    },
-    orderBy: {
-      createdAt: "desc"
-    }
-  });
+  const currentUser = await getUserEventFromDbByEmail(prisma, email);
   if (!currentUser || !currentUser.isActive) {
     res.status(404).json({ message: "No such user." });
     return;
