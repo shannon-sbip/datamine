@@ -17,6 +17,13 @@ export const GET_USER_BY_EMAIL = (email: string) => PRISMA.userEvent.findMany({
     }
   }
 });
+export const GET_DOWNLOADS_BY_USER = (userId: string) => PRISMA.downloadEvent.findMany({
+  where: {
+    userId: {
+      equals: userId
+    }
+  }
+});
 export const SET_INITIAL_DB_STATE = () => PRISMA.userEvent.deleteMany()
   .then(() => Promise.all([
     PRISMA.userEvent.create({
@@ -32,5 +39,10 @@ export const SET_INITIAL_DB_STATE = () => PRISMA.userEvent.deleteMany()
   .then(() => PRISMA.userEvent.findMany())
   .then((result) => {
     expect(result.length).toEqual(3);
+  })
+  .then(() => PRISMA.downloadEvent.deleteMany())
+  .then(() => PRISMA.downloadEvent.findMany())
+  .then((result) => {
+    expect(result.length).toEqual(0);
   })
   .catch((error) => { throw new Error(error); });
