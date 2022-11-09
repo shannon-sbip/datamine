@@ -28,13 +28,19 @@ const handler = async (
       res.status(404).json({ message: "Seal is invalid. Please generate a new magic link." });
       return;
     }
-    await postDownloadEvent(prisma, currentUser.userId);
-    res.status(201).json({
-      message: "Success.",
-      data: {
-        url: getS3Url()
-      }
-    });
+    const downloadEventSuccess = await postDownloadEvent(prisma, currentUser);
+    if (downloadEventSuccess) {
+      res.status(201).json({
+        message: "Success.",
+        data: {
+          url: getS3Url()
+        }
+      });
+    } else {
+      res.status(403).json({
+        message: "Max download already reached."
+      });
+    }
   } catch (e) {
     res.status(500).json({ message: "Something went wrong." });
   }
