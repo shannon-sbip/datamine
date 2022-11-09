@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
-import getUnsealedData from "../../../lib/getUnsealedData";
-import getUserEventFromDbByUserId from "../../../lib/getUserEventFromDbByUserId";
-import { User } from "../../../types/user";
+import getUnsealedData from "../../../../lib/getUnsealedData";
+import getUserEventFromDbByUserId from "../../../../lib/getUserEventFromDbByUserId";
+import { User } from "../../../../types/user";
 type Data = {
   message: string
   data?: User

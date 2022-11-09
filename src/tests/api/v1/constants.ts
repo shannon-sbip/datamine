@@ -10,13 +10,14 @@ export const ADMIN = getUserWithDateObj(data[0]);
 export const USER_ACTIVE = getUserWithDateObj(data[1]);
 export const USER_ACTIVE_WITH_0_MAX_DOWNLOADS = getUserWithDateObj(data[2]);
 export const USER_INACTIVE = getUserWithDateObj(data[3]);
-export const GET_USER_BY_EMAIL = (email: string) => PRISMA.userEvent.findMany({
+export const GET_USER_EVENT_BY_EMAIL = (email: string) => PRISMA.userEvent.findMany({
   where: {
     email: {
       equals: email
     }
   }
 });
+export const GET_USER_EVENTS = () => PRISMA.userEvent.findMany();
 export const GET_DOWNLOADS_BY_USER = (userId: string) => PRISMA.downloadEvent.findMany({
   where: {
     userId: {
