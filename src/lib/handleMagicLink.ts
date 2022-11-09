@@ -11,6 +11,7 @@ type HandleMagicLinkArgs = {
 const handleMagicLink = async ({
   prisma,
   userSeal,
+  // eslint-disable-next-line no-unused-vars
   req,
   res
 }: HandleMagicLinkArgs) => {
@@ -20,11 +21,6 @@ const handleMagicLink = async ({
     res.status(400).json({ message: "Seal is invalid. Please generate a new link." });
     return;
   }
-  req.session.userEvent = {
-    id: currentUser.id,
-    userId: currentUser.userId
-  };
-  req.session.save();
-  res.status(200).json({ message: `Login session has been created for ${currentUser.email}` });
+  res.status(200).json({ message: `Login successful for ${currentUser.email}` });
 };
 export default handleMagicLink;

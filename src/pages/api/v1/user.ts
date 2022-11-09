@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import getUnsealedData from "../../../lib/getUnsealedData";
 import getUserEventFromDbByUserId from "../../../lib/getUserEventFromDbByUserId";
-import { withSessionRoute } from "../../../lib/withIronSession";
 import { User } from "../../../types/user";
 type Data = {
   message: string
@@ -43,4 +42,4 @@ const handler = async (
     res.status(500).json({ message: "Something went wrong." });
   }
 };
-export default withSessionRoute(handler);
+export default handler;

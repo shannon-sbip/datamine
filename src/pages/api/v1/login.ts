@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import handleMagicLink from "../../../lib/handleMagicLink";
 import handleMagicLinkGeneration from "../../../lib/handleMagicLinkGeneration";
-import { withSessionRoute } from "../../../lib/withIronSession";
 type Data = {
   message: string
 }
@@ -36,4 +35,4 @@ const handler = async (
     res.status(500).json({ message: "Something went wrong." });
   }
 };
-export default withSessionRoute(handler);
+export default handler;

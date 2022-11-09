@@ -6,13 +6,11 @@ jest.mock("../../../lib/postEmail");
 const USER_ACTIVE_SEAL = "USER_ACTIVE_SEAL";
 describe("/login", () => {
   let status: {};
-  let save: () => null;
   beforeEach(async () => {
     jest.spyOn(ironSession, "unsealData").mockResolvedValue({
       userId: USER_ACTIVE.userId,
       eventId: USER_ACTIVE.id
     });
-    save = jest.fn().mockResolvedValue(null);
     status = jest.fn().mockReturnValue({ json: () => null });
   });
   describe("GIVEN an active user", () => {
@@ -30,7 +28,6 @@ describe("/login", () => {
             cookie: ""
           },
           session: {
-            save
           }
         };
         const res = {
@@ -42,7 +39,6 @@ describe("/login", () => {
           password: process.env.SEAL_PASSWORD
         });
         expect(status).toHaveBeenCalledWith(200);
-        expect(save).toHaveBeenCalledTimes(1);
       });
     });
   });
