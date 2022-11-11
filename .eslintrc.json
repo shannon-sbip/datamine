@@ -67,6 +67,7 @@
         "react-hooks/exhaustive-deps": "warn",
         "import/prefer-default-export": "off",
         "react/prop-types": "off",
+        "react/require-default-props": "off",
         "jest/valid-title": "off",
         "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.{js,ts,jsx,tsx}", "**/*.spec.{js,ts,jsx,tsx}"]}]
     }
