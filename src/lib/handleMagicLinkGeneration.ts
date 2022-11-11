@@ -29,12 +29,16 @@ const handleMagicLinkGeneration = async ({
   }, {
     password: process.env.SEAL_PASSWORD || ""
   });
+  const magicLink = `${process.env.NEXT_PUBLIC_APP_URL}/user?seal=${newSeal}`;
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.log(magicLink);
+  }
   postEmail(
     {
       email: currentUser.email,
       subject: "Magic Link",
-      // eslint-disable-next-line max-len
-      Body: `Hey there ${currentUser.name}, <a href="${process.env.NEXT_PUBLIC_APP_URL}/user?seal=${newSeal}">click here to login</a>.`
+      Body: `Hey there ${currentUser.name}, <a href="${magicLink}">click here to login</a>.`
     }
   );
   res.status(201).json({ message: `Magic Link has been sent to ${currentUser.email}` });
