@@ -32,5 +32,7 @@ describe(userStory, () => {
     expect(screen.getByText(USER_ACTIVE.validFrom.toISOString())).toBeInTheDocument();
     expect(screen.getByText(USER_ACTIVE.validTo.toISOString())).toBeInTheDocument();
     expect(screen.getByText("FALSE")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Download Dataset" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Manage Users" })).not.toBeInTheDocument();
   });
 });

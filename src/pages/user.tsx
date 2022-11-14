@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
+import Link from "next/link";
 import { useState } from "react";
 import getDownloadsFromDbByUserId from "../lib/getDownloadsFromDbByUserId";
 import getUnsealedData from "../lib/getUnsealedData";
@@ -95,6 +96,15 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
         >
           Download Dataset
         </Button>
+        {isAdmin && (
+          <Link href="/manage-users">
+            <Button
+              type="button"
+            >
+              Manage Users
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );
