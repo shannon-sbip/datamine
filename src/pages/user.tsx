@@ -3,7 +3,12 @@ import { GetServerSideProps, NextPage } from "next";
 import getUnsealedData from "../lib/getUnsealedData";
 import getUserEventFromDbByUserId from "../lib/getUserEventFromDbByUserId";
 import type { User } from "../types/user";
-const Page: NextPage<{ user: User | null }> = ({ user }) => {
+import Button from "../ui/Button";
+type PageProps = {
+  user: User | null
+  seal?: string
+}
+const Page: NextPage<PageProps> = ({ user, seal }) => {
   if (!user) {
     return (
       <div>
@@ -22,6 +27,17 @@ const Page: NextPage<{ user: User | null }> = ({ user }) => {
     validTo,
     isAdmin
   } = user;
+  const handleDownloadDataset = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/v1/dataset`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        seal
+      })
+    });
+  };
   return (
     <div>
       <span>
@@ -66,10 +82,13 @@ const Page: NextPage<{ user: User | null }> = ({ user }) => {
           </tr>
         </tbody>
       </table>
+      <div>
+        <Button type="button" onClick={handleDownloadDataset}>Download Dataset</Button>
+      </div>
     </div>
   );
 };
-export const getServerSideProps: GetServerSideProps<{ user: User | null }> = async (context) => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async (context) => {
   const prisma = new PrismaClient();
   const seal = String(context.query.seal);
   const unsealData = await getUnsealedData(seal);
@@ -83,6 +102,7 @@ export const getServerSideProps: GetServerSideProps<{ user: User | null }> = asy
   }
   return {
     props: {
+      seal,
       user: {
         id: userEvent.userId,
         email: userEvent.email,

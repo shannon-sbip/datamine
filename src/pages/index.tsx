@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import submitEmail from "../lib/submitEmail";
+import Button from "../ui/Button";
 import FormInputField from "../ui/FormInputField";
 import styles from "./index.module.css";
 const Home = () => {
@@ -36,7 +37,7 @@ const Home = () => {
                   placeholder="Email..."
                   registerProps={register("email")}
                 />
-                <button type="submit" className={styles.submit} disabled={!watch("email")}>Submit</button>
+                <Button type="submit" disabled={!watch("email")}>Submit</Button>
               </form>
             );
         }

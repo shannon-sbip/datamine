@@ -1,6 +1,6 @@
 {
   "name": "datamine",
-  "version": "0.1.1668392392233",
+  "version": "0.1.1668395071391",
   "private": true,
   "scripts": {
     "prepare": "yarn db:reset",
@@ -11,8 +11,8 @@
     "lint:fix": "next lint -d . --fix",
     "update-version": "node scripts/update-version.js",
     "test": "yarn test:frontend && yarn test:backend",
-    "test:frontend": "jest -c jest.frontend.config.js",
-    "test:backend": "jest -c jest.backend.config.js -i src/tests/api/ --runInBand",
+    "test:frontend": "dotenv -e .env.local -- jest -c jest.frontend.config.js",
+    "test:backend": "dotenv -e .env.local -- jest -c jest.backend.config.js -i src/tests/api/ --runInBand",
     "db:migrate": "dotenv -e .env.local -- yarn prisma migrate dev",
     "db:populate": "dotenv -e .env.local -- node ./scripts/db-add-user-events.js",
     "db:reset": "dotenv -e .env.local -- yarn prisma migrate reset && yarn db:populate",
