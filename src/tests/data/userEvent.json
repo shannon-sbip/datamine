@@ -8,7 +8,7 @@
       "affilation": "affilation1",
       "maxDownloadCount": 1,
       "validFrom": 1667870996000,
-      "validTo": 1667870996000,
+      "validTo": 1667870996001,
       "isAdmin": true,
       "isActive": true
     },
@@ -20,7 +20,7 @@
       "affilation": "affilation1",
       "maxDownloadCount": 1,
       "validFrom": 1667870996000,
-      "validTo": 1667870996000,
+      "validTo": 1667870996001,
       "isAdmin": false,
       "isActive": true
     },
@@ -32,7 +32,7 @@
       "affilation": "affilation1",
       "maxDownloadCount": 0,
       "validFrom": 1667870996000,
-      "validTo": 1667870996000,
+      "validTo": 1667870996001,
       "isAdmin": false,
       "isActive": true
     },
@@ -44,7 +44,7 @@
       "affilation": "affilation1",
       "maxDownloadCount": 1,
       "validFrom": 1667870996000,
-      "validTo": 1667870996000,
+      "validTo": 1667870996001,
       "isAdmin": false,
       "isActive": false
     }

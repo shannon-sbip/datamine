@@ -7,6 +7,6 @@ export type User = {
     maxDownloadCount: number
     validFrom: number
     validTo: number
-    isActive?: boolean
-    isAdmin?: boolean
+    isActive?: boolean | null
+    isAdmin?: boolean | null
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import App from "../pages";
+import App from "../pages/index";
 global.fetch = jest.fn().mockResolvedValue({
   status: 201,
   json: () => Promise.resolve({})
