@@ -97,7 +97,13 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
           Download Dataset
         </Button>
         {isAdmin && (
-          <Link href="/manage-users">
+          <Link href={{
+            pathname: "/manage-users",
+            query: {
+              seal
+            }
+          }}
+          >
             <Button
               type="button"
             >
