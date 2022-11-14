@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
+import { useState } from "react";
+import getDownloadsFromDbByUserId from "../lib/getDownloadsFromDbByUserId";
 import getUnsealedData from "../lib/getUnsealedData";
 import getUserEventFromDbByUserId from "../lib/getUserEventFromDbByUserId";
 import type { User } from "../types/user";
@@ -9,6 +11,7 @@ type PageProps = {
   seal?: string
 }
 const Page: NextPage<PageProps> = ({ user, seal }) => {
+  const [isLoading, setIsLoading] = useState(false);
   if (!user) {
     return (
       <div>
@@ -28,6 +31,7 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
     isAdmin
   } = user;
   const handleDownloadDataset = async () => {
+    setIsLoading(true);
     await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/v1/dataset`, {
       method: "POST",
       headers: {
@@ -37,6 +41,7 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
         seal
       })
     });
+    window.location.reload();
   };
   return (
     <div>
@@ -83,7 +88,13 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
         </tbody>
       </table>
       <div>
-        <Button type="button" onClick={handleDownloadDataset}>Download Dataset</Button>
+        <Button
+          type="button"
+          onClick={handleDownloadDataset}
+          disabled={isLoading || downloadCount >= maxDownloadCount}
+        >
+          Download Dataset
+        </Button>
       </div>
     </div>
   );
@@ -100,6 +111,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
       }
     };
   }
+  const downloads = await getDownloadsFromDbByUserId(prisma, userEvent.userId);
   return {
     props: {
       seal,
@@ -109,7 +121,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
         name: userEvent.name,
         affilation: userEvent.affilation,
         isActive: userEvent.isActive,
-        downloadCount: 0,
+        downloadCount: downloads.length,
         maxDownloadCount: userEvent.maxDownloadCount,
         validFrom: userEvent.validFrom.getTime(),
         validTo: userEvent.validTo.getTime(),
