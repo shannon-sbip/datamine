@@ -119,7 +119,14 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
 };
 export const getServerSideProps: GetServerSideProps<PageProps> = async (context) => {
   const prisma = new PrismaClient();
-  const seal = String(context.query.seal);
+  const seal = String(context.query.seal || "");
+  if (!seal) {
+    return {
+      props: {
+        user: null
+      }
+    };
+  }
   const unsealData = await getUnsealedData(seal);
   const userEvent = await getUserEventFromDbByUserId(prisma, unsealData.userId);
   if (userEvent?.id !== unsealData.eventId) {
