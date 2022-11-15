@@ -1,6 +1,6 @@
 import * as ironSession from "iron-session";
 import userUpdateApi from "../../../pages/api/v1/user/update";
-import { GET_USER_EVENTS, USER_ACTIVE } from "./constants";
+import { GET_USER_EVENTS, USER_ACTIVE } from "../../constants";
 jest.mock("iron-session");
 const USER_SEAL = "USER_SEAL";
 describe("/user/update", () => {

@@ -2,8 +2,8 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Papa from "papaparse";
-import ManageUsersPage from "../pages/manage-users";
-import { USER_ACTIVE } from "./api/v1/constants";
+import ManageUsersPage from "../../pages/manage-users";
+import { USER_ACTIVE } from "../constants";
 const userStory = `
 Given an admin,
 When admin navigates to the manage user web page,

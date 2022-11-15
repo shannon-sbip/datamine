@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { SET_INITIAL_DB_STATE } from "./api/v1/constants";
+import { SET_INITIAL_DB_STATE } from "./constants";
 const environment = process.env.NODE_ENV === "production" ? process.env.NODE_ENV : "local";
 dotenv.config({ path: `.env.${environment}` });
 jest.mock("../lib/withIronSession", () => ({

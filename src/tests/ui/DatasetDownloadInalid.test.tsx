@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import UserPage from "../pages/user";
-import { USER_ACTIVE } from "./api/v1/constants";
+import UserPage from "../../pages/user";
+import { USER_ACTIVE } from "../constants";
 const userStory = `
 Given a valid user, with a valid magic link, and an invalid download count,
 When user navigates to the web page through the magic link,

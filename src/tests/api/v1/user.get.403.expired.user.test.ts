@@ -1,6 +1,6 @@
 import * as ironSession from "iron-session";
 import userApi from "../../../pages/api/v1/user";
-import { USER_EXPIRED } from "./constants";
+import { USER_EXPIRED } from "../../constants";
 jest.mock("iron-session");
 const USER_SEAL = "USER_SEAL";
 describe("/user", () => {

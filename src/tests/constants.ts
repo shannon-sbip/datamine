@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { data } from "../../data/userEvent.json";
+import { data } from "./data/userEvent.json";
 const getUserWithDateObj = (user: typeof data[0]) => ({
   ...user,
   validFrom: new Date(user.validFrom),

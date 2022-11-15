@@ -1,5 +1,5 @@
 import datasetApi from "../../../pages/api/v1/dataset";
-import { USER_ACTIVE } from "./constants";
+import { USER_ACTIVE } from "../../constants";
 describe("/dataset", () => {
   let status: {};
   beforeEach(async () => {

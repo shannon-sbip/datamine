@@ -1,5 +1,5 @@
 import userApi from "../../../pages/api/v1/user";
-import { USER_ACTIVE } from "./constants";
+import { USER_ACTIVE } from "../../constants";
 describe("/user", () => {
   let status: {};
   beforeEach(async () => {

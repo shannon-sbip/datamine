@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ManageUsersPage from "../pages/manage-users";
-import { ADMIN, USER_ACTIVE } from "./api/v1/constants";
+import ManageUsersPage from "../../pages/manage-users";
+import { ADMIN, USER_ACTIVE } from "../constants";
 const userStory = `
 Given an admin,
 When admin navigates to the manage user web page,

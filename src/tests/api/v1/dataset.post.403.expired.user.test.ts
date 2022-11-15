@@ -1,7 +1,7 @@
 import * as ironSession from "iron-session";
 import getS3Url from "../../../lib/getS3Url";
 import datasetApi from "../../../pages/api/v1/dataset";
-import { GET_DOWNLOADS_BY_USER, USER_EXPIRED } from "./constants";
+import { GET_DOWNLOADS_BY_USER, USER_EXPIRED } from "../../constants";
 jest.mock("iron-session");
 jest.mock("../../../lib/getS3Url", () => ({
   __esModule: true,

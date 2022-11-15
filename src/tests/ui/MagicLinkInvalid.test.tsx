@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import UserPage from "../pages/user";
+import UserPage from "../../pages/user";
 const userStory = `
 Given an invalid magic link,
 When user navigates to the web page through the magic link,

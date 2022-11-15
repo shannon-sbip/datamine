@@ -1,28 +1,28 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import App from "../pages/index";
+import App from "../../pages/index";
 global.fetch = jest.fn().mockResolvedValue({
-  status: 201,
+  status: 404,
   json: () => Promise.resolve({})
 });
 const userStory = `
 Given no inital state,
 When user navigates to the web page,
-and enters email,
+and enters an unverified email,
 and clicks submit,
-Then user sees the statement to check inbox.
+Then user sees an error message.
 `;
 describe(userStory, () => {
   beforeEach(() => {
     render(<App />);
   });
-  it("shows the statement to check inbox.", async () => {
+  it("shows the error message", async () => {
     const user = userEvent.setup();
     const emailInput = screen.getByRole("textbox");
-    await user.type(emailInput, "validated-email@email.com");
+    await user.type(emailInput, "unvalidated-email@email.com");
     const submitButton = screen.getByRole("button");
     await user.click(submitButton);
-    expect(screen.getByText("Your magic link has been sent to your inbox.")).toBeInTheDocument();
+    expect(screen.getByText("The email you entered does not exist in our database.")).toBeInTheDocument();
   });
 });

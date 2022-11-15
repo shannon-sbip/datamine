@@ -1,5 +1,5 @@
 import loginApi from "../../../pages/api/v1/login";
-import { USER_INACTIVE } from "./constants";
+import { USER_INACTIVE } from "../../constants";
 jest.mock("../../../lib/postEmail");
 describe("/login", () => {
   let status: {};

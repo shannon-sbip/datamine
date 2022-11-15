@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import UserPage from "../pages/user";
-import { ADMIN } from "./api/v1/constants";
+import UserPage from "../../pages/user";
+import { ADMIN } from "../constants";
 const userStory = `
 Given a valid admin user with a valid magic link,
 When admin navigates to the web page through the magic link,

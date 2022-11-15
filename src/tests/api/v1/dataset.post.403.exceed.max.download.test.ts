@@ -1,6 +1,6 @@
 import * as ironSession from "iron-session";
 import datasetApi from "../../../pages/api/v1/dataset";
-import { USER_ACTIVE_WITH_0_MAX_DOWNLOADS } from "./constants";
+import { USER_ACTIVE_WITH_0_MAX_DOWNLOADS } from "../../constants";
 jest.mock("iron-session");
 const USER_ACTIVE_SEAL = "USER_ACTIVE_SEAL";
 describe("/user", () => {

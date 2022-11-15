@@ -1,6 +1,6 @@
 import * as ironSession from "iron-session";
 import loginApi from "../../../pages/api/v1/login";
-import { USER_ACTIVE } from "./constants";
+import { USER_ACTIVE } from "../../constants";
 jest.mock("iron-session");
 jest.mock("../../../lib/postEmail");
 const USER_ACTIVE_SEAL = "USER_ACTIVE_SEAL";
