@@ -10,3 +10,13 @@ export type User = {
     isActive?: boolean | null
     isAdmin?: boolean | null
 };
+export const PropertiesNeededForCreate = [
+  "name",
+  "email",
+  "affilation",
+  "maxDownloadCount",
+  "validFrom",
+  "validTo",
+  "isActive",
+  "isAdmin"
+];

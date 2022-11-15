@@ -4,6 +4,9 @@ const getDownloadsFromDbByUserId = (prisma: PrismaClient, userId: string) => pri
     userId: {
       equals: userId
     }
+  },
+  orderBy: {
+    createdAt: "desc"
   }
 });
 export default getDownloadsFromDbByUserId;

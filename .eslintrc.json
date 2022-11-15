@@ -69,6 +69,7 @@
         "react/prop-types": "off",
         "react/require-default-props": "off",
         "jest/valid-title": "off",
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.{js,ts,jsx,tsx}", "**/*.spec.{js,ts,jsx,tsx}"]}]
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.{js,ts,jsx,tsx}", "**/*.spec.{js,ts,jsx,tsx}"]}],
+        "no-unused-vars": "off"
     }
 }

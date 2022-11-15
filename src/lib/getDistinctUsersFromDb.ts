@@ -3,7 +3,10 @@ import { User } from "../types/user";
 const getDistinctUsersFromDb = async (prisma: PrismaClient): Promise<Partial<User>[]> => {
   const userEvents = await prisma.userEvent.findMany({
     where: {},
-    distinct: ["email"]
+    distinct: ["email"],
+    orderBy: {
+      createdAt: "desc"
+    }
   });
   const users = userEvents.reduce((acc, {
     userId, name, affilation, email, isActive, isAdmin, validFrom, validTo
