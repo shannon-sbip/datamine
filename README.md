@@ -10,6 +10,7 @@ This is a project that leverages on Magic Links to distribute datasets to pre-ap
     * [Capacity Estimation](#Capacity-Estimation-(Data-Storage))
     * [Cost Estimation](#Cost-Estimation)
     * [System Architecture](#System-Architecture)
+2. [Development](#Development)
 
 ## System Design
 -----
@@ -149,3 +150,42 @@ __B5__: User recieves the Magic Link in their mailbox and uses it to sign in to 
 __B6__: Upon clicking on a valid Magic Link, the user will be directed to the admin panel of the WebApp.
 
 __B7__: User uploads csv file containing the list of users who can download the dataset.
+
+## Development
+-----
+
+### __Quick Start__
+
+Ensure you have the latest stable version installed for _[Node](https://nodejs.org/en/), [Python3 & pip3](https://www.python.org/downloads/), and [Docker](https://www.docker.com/)_.
+
+Ensure you have installed [LocalStack](https://github.com/localstack/localstack) using ```pip3```.
+
+[Optional] You have the following extensions/plugins in your IDE installed:
+_```ESLint, GitLens, Prisma, Tailwind CSS IntelliSense, CSS Modules, SQLite Viewer```_
+
+Clone the repository into your chosen directory and run the following commands:
+```
+// Install dependencies and setup the project.
+// Requires user interaction, as there are options.
+yarn
+
+// Run all the tests in the project
+// These tests should be run often as you develop on it.
+yarn test
+
+// Start the development server
+// App is usually hosted on http://localhost:3000
+yarn dev
+```
+```
+// In a separate terminal, start localstack
+// Note that you may have to add the pip3 location to your path.
+localstack start -d
+```
+
+There are predefined users loaded into the database and you may inspect the database file at ```/prisma/data/dev.sqlite```, or refer to ```/src/tests/data/userEvent.json```.
+You may choose any of the valid users defined there to login to the application locally. For instance, you may use ```admin@example.com```.
+
+As the application requires interacting with external Amazon services, those functions are stub out when developing locally. Important information needed for development can be found in the console where ```yarn dev``` was run. For instance, the login flow will print the _magic link_ onto the console for you to interact with it locally.
+
+In case you wish to reset the local database, you may run ```yarn``` to reset it.
