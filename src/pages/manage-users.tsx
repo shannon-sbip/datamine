@@ -99,6 +99,11 @@ const Page: NextPage<PageProps> = ({ users, seal }) => {
 export const getServerSideProps: GetServerSideProps<PageProps> = async (context) => {
   const prisma = new PrismaClient();
   const seal = String(context.query?.seal || "");
+  if (!seal) {
+    return {
+      notFound: true
+    };
+  }
   const unsealData = await getUnsealedData(seal);
   const userEvent = await getUserEventFromDbByUserId(prisma, unsealData.userId);
   if (userEvent?.id !== unsealData.eventId || !userEvent.isAdmin) {
