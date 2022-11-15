@@ -40,7 +40,7 @@ const Page: NextPage<PageProps> = ({ users, seal }) => {
   };
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="overflow-x-auto w-full flex flex-col">
+      <div className="overflow-x-auto w-full max-w-7xl flex flex-col">
         <table className="table-auto border-separate border-spacing-2  border border-slate-400">
           <thead>
             <tr className="font-bold">
