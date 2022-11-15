@@ -21,10 +21,12 @@ type PageProps = {
 const UPLOAD_FIELD_NAME = "user_upload";
 const Page: NextPage<PageProps> = ({ users, seal }) => {
   const fileReader = useFileReader();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     handleSubmit, register, watch
   } = useForm();
   const handleFormFileUpload = (fields: FieldValues) => {
+    setIsLoading(true);
     const file = fields[UPLOAD_FIELD_NAME][0];
     if (!fileReader || !file) {
       return;
@@ -62,7 +64,7 @@ const Page: NextPage<PageProps> = ({ users, seal }) => {
             accept=".csv"
             registerProps={register(UPLOAD_FIELD_NAME)}
           />
-          <Button type="submit" disabled={!watch(UPLOAD_FIELD_NAME)?.length}>Upload</Button>
+          <Button type="submit" disabled={isLoading || !watch(UPLOAD_FIELD_NAME)?.length}>Upload</Button>
         </form>
       </div>
       <div className="overflow-x-auto w-full max-w-7xl flex flex-col">
