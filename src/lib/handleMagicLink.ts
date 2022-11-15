@@ -11,7 +11,6 @@ type HandleMagicLinkArgs = {
 const handleMagicLink = async ({
   prisma,
   userSeal,
-  // eslint-disable-next-line no-unused-vars
   req,
   res
 }: HandleMagicLinkArgs) => {
@@ -19,6 +18,15 @@ const handleMagicLink = async ({
   const currentUser = await getUserEventFromDbByUserId(prisma, userId);
   if (!currentUser || !currentUser.isActive || currentUser.id !== eventId) {
     res.status(400).json({ message: "Seal is invalid. Please generate a new link." });
+    return;
+  }
+  const range = [
+    currentUser.validFrom.getTime(),
+    currentUser.validTo.getTime()
+  ];
+  const now = (new Date()).getTime();
+  if (now < range[0] || now > range[1]) {
+    res.status(403).json({ message: "User is currently not able to access the data." });
     return;
   }
   res.status(200).json({ message: `Login successful for ${currentUser.email}` });

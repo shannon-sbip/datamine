@@ -127,6 +127,18 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
       }
     };
   }
+  const range = [
+    userEvent.validFrom.getTime(),
+    userEvent.validTo.getTime()
+  ];
+  const now = (new Date()).getTime();
+  if (now < range[0] || now > range[1]) {
+    return {
+      props: {
+        user: null
+      }
+    };
+  }
   const downloads = await getDownloadsFromDbByUserId(prisma, userEvent.userId);
   return {
     props: {
@@ -139,8 +151,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
         isActive: userEvent.isActive,
         downloadCount: downloads.length,
         maxDownloadCount: userEvent.maxDownloadCount,
-        validFrom: userEvent.validFrom.getTime(),
-        validTo: userEvent.validTo.getTime(),
+        validFrom: range[0],
+        validTo: range[1],
         isAdmin: userEvent.isAdmin
       }
     }

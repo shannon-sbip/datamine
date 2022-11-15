@@ -7,8 +7,8 @@
       "name": "admin",
       "affilation": "affilation1",
       "maxDownloadCount": 1,
-      "validFrom": 1667870996000,
-      "validTo": 1667870996001,
+      "validFrom": 946656000001,
+      "validTo": 32503651200001,
       "isAdmin": true,
       "isActive": true
     },
@@ -19,8 +19,8 @@
       "name": "user_active",
       "affilation": "affilation2",
       "maxDownloadCount": 2,
-      "validFrom": 1667870996010,
-      "validTo": 1667870996011,
+      "validFrom": 946656000002,
+      "validTo": 32503651200002,
       "isAdmin": false,
       "isActive": true
     },
@@ -31,8 +31,8 @@
       "name": "user_active_0_max_downloads",
       "affilation": "affilation3",
       "maxDownloadCount": 0,
-      "validFrom": 1667870996020,
-      "validTo": 1667870996021,
+      "validFrom": 946656000003,
+      "validTo": 32503651200003,
       "isAdmin": false,
       "isActive": true
     },
@@ -43,10 +43,22 @@
       "name": "user_inactive",
       "affilation": "affilation4",
       "maxDownloadCount": 1,
-      "validFrom": 1667870996030,
-      "validTo": 16678709960031,
+      "validFrom": 946656000004,
+      "validTo": 32503651200004,
       "isAdmin": false,
       "isActive": false
+    },
+    {
+      "id": "cl8zfkhhr0001xt0pdyzkw8kr",
+      "userId": "cl8zfkhhr0005x0tpz4nue2b9",
+      "email": "user_expired@example.com",
+      "name": "user_expired",
+      "affilation": "affilation5",
+      "maxDownloadCount": 1,
+      "validFrom": 946656000005,
+      "validTo": 946656000015,
+      "isAdmin": false,
+      "isActive": true
     }
   ]
 }

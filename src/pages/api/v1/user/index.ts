@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
+import getDownloadsFromDbByUserId from "../../../../lib/getDownloadsFromDbByUserId";
 import getUnsealedData from "../../../../lib/getUnsealedData";
 import getUserEventFromDbByUserId from "../../../../lib/getUserEventFromDbByUserId";
 import { User } from "../../../../types/user";
@@ -25,6 +26,16 @@ const handler = async (
       res.status(404).json({ message: "Seal is invalid. Please generate a new magic link." });
       return;
     }
+    const range = [
+      currentUser.validFrom.getTime(),
+      currentUser.validTo.getTime()
+    ];
+    const now = (new Date()).getTime();
+    if (now < range[0] || now > range[1]) {
+      res.status(403).json({ message: "User is currently not able to access the data." });
+      return;
+    }
+    const downloads = await getDownloadsFromDbByUserId(prisma, currentUser.userId);
     res.status(200).json({
       message: "Success.",
       data: {
@@ -32,10 +43,10 @@ const handler = async (
         email: currentUser.email,
         name: currentUser.name,
         affilation: currentUser.affilation,
-        downloadCount: 0,
+        downloadCount: downloads.length,
         maxDownloadCount: currentUser.maxDownloadCount,
-        validFrom: currentUser.validFrom.getTime(),
-        validTo: currentUser.validTo.getTime()
+        validFrom: range[0],
+        validTo: range[1]
       }
     });
   } catch (e) {

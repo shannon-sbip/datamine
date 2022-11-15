@@ -1,7 +1,7 @@
 import * as ironSession from "iron-session";
 import getS3Url from "../../../lib/getS3Url";
 import datasetApi from "../../../pages/api/v1/dataset";
-import { GET_DOWNLOADS_BY_USER, USER_ACTIVE } from "./constants";
+import { GET_DOWNLOADS_BY_USER, USER_EXPIRED } from "./constants";
 jest.mock("iron-session");
 jest.mock("../../../lib/getS3Url", () => ({
   __esModule: true,
@@ -13,15 +13,15 @@ describe("/dataset", () => {
   let json: {};
   beforeEach(async () => {
     jest.spyOn(ironSession, "unsealData").mockResolvedValue({
-      userId: USER_ACTIVE.userId,
-      eventId: USER_ACTIVE.id
+      userId: USER_EXPIRED.userId,
+      eventId: USER_EXPIRED.id
     });
     json = jest.fn().mockReturnValue(null);
     status = jest.fn().mockReturnValue({ json });
   });
   describe("GIVEN a list of users", () => {
-    describe("WHEN a POST request is made with a valid seal", () => {
-      it("THEN the status code returns 201, download event created, and s3 url sent to client", async () => {
+    describe("WHEN a POST request is made with an expired user", () => {
+      it("THEN the status code returns 403", async () => {
         const { unsealData } = ironSession;
         const req = {
           method: "POST",
@@ -37,20 +37,17 @@ describe("/dataset", () => {
         const res = {
           status
         };
-        expect((await GET_DOWNLOADS_BY_USER(USER_ACTIVE.userId)).length).toEqual(0);
+        expect((await GET_DOWNLOADS_BY_USER(USER_EXPIRED.userId)).length).toEqual(0);
         // @ts-ignore
         await datasetApi(req, res);
         expect(unsealData).toHaveBeenCalledWith(USER_SEAL, {
           password: process.env.SEAL_PASSWORD
         });
-        expect((await GET_DOWNLOADS_BY_USER(USER_ACTIVE.userId)).length).toEqual(1);
-        expect(getS3Url).toHaveBeenCalled();
-        expect(status).toHaveBeenCalledWith(201);
+        expect((await GET_DOWNLOADS_BY_USER(USER_EXPIRED.userId)).length).toEqual(0);
+        expect(getS3Url).not.toHaveBeenCalled();
+        expect(status).toHaveBeenCalledWith(403);
         expect(json).toHaveBeenCalledWith({
-          message: "Success.",
-          data: {
-            url: ""
-          }
+          message: "User is currently not able to access the data."
         });
       });
     });

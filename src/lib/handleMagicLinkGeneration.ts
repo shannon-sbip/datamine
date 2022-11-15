@@ -23,6 +23,15 @@ const handleMagicLinkGeneration = async ({
     res.status(404).json({ message: "No such user." });
     return;
   }
+  const range = [
+    currentUser.validFrom.getTime(),
+    currentUser.validTo.getTime()
+  ];
+  const now = (new Date()).getTime();
+  if (now < range[0] || now > range[1]) {
+    res.status(403).json({ message: "User is currently not able to access the data." });
+    return;
+  }
   const newSeal = await sealData({
     userId: currentUser.userId,
     eventId: currentUser.id

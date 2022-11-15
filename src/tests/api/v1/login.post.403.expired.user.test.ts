@@ -1,7 +1,7 @@
 import { sealData } from "iron-session";
 import loginApi from "../../../pages/api/v1/login";
 import postEmail from "../../../lib/postEmail";
-import { USER_ACTIVE } from "./constants";
+import { USER_EXPIRED } from "./constants";
 jest.mock("iron-session");
 jest.mock("../../../lib/postEmail");
 describe("/login", () => {
@@ -9,12 +9,12 @@ describe("/login", () => {
   beforeEach(async () => {
     status = jest.fn().mockReturnValue({ json: () => null });
   });
-  describe("GIVEN an active user", () => {
-    describe("WHEN a valid login request is made", () => {
-      it("THEN the email with magic link is triggered and the status code returns 201", async () => {
+  describe("GIVEN an expired user", () => {
+    describe("WHEN a login request is made", () => {
+      it("THEN the status code returns 403", async () => {
         const req = {
           method: "POST",
-          body: { email: USER_ACTIVE.email },
+          body: { email: USER_EXPIRED.email },
           headers: {
             cookie: ""
           },
@@ -26,14 +26,9 @@ describe("/login", () => {
         };
         // @ts-ignore
         await loginApi(req, res);
-        expect(sealData).toHaveBeenCalledWith({
-          eventId: USER_ACTIVE.id,
-          userId: USER_ACTIVE.userId
-        }, {
-          password: process.env.SEAL_PASSWORD
-        });
-        expect(postEmail).toHaveBeenCalled();
-        expect(status).toHaveBeenCalledWith(201);
+        expect(sealData).not.toHaveBeenCalled();
+        expect(postEmail).not.toHaveBeenCalled();
+        expect(status).toHaveBeenCalledWith(403);
       });
     });
   });

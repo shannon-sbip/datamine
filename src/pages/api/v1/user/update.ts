@@ -26,6 +26,15 @@ const handler = async (
       res.status(404).json({ message: "Seal is invalid. Please generate a new magic link." });
       return;
     }
+    const range = [
+      currentUser.validFrom.getTime(),
+      currentUser.validTo.getTime()
+    ];
+    const now = (new Date()).getTime();
+    if (now < range[0] || now > range[1]) {
+      res.status(403).json({ message: "User is currently not able to access the data." });
+      return;
+    }
     const postUserEventSuccess = await postUserEvent(prisma, users);
     if (postUserEventSuccess) {
       res.status(201).json({ message: "Successfully updated the users." });

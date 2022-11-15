@@ -10,6 +10,7 @@ export const ADMIN = getUserWithDateObj(data[0]);
 export const USER_ACTIVE = getUserWithDateObj(data[1]);
 export const USER_ACTIVE_WITH_0_MAX_DOWNLOADS = getUserWithDateObj(data[2]);
 export const USER_INACTIVE = getUserWithDateObj(data[3]);
+export const USER_EXPIRED = getUserWithDateObj(data[4]);
 export const GET_USER_EVENT_BY_EMAIL = (email: string) => PRISMA.userEvent.findMany({
   where: {
     email: {
@@ -38,11 +39,14 @@ export const SET_INITIAL_DB_STATE = () => PRISMA.userEvent.deleteMany()
     }),
     PRISMA.userEvent.create({
       data: USER_ACTIVE_WITH_0_MAX_DOWNLOADS
+    }),
+    PRISMA.userEvent.create({
+      data: USER_EXPIRED
     })
   ]))
   .then(() => PRISMA.userEvent.findMany())
   .then((result) => {
-    expect(result.length).toEqual(4);
+    expect(result.length).toEqual(5);
   })
   .then(() => PRISMA.downloadEvent.deleteMany())
   .then(() => PRISMA.downloadEvent.findMany())
