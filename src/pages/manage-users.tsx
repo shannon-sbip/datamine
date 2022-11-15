@@ -39,7 +39,32 @@ const Page: NextPage<PageProps> = ({ users, seal }) => {
     fileReader.readAsText(file);
   };
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center mt-[20px]">
+      <span className="font-bold">User Management</span>
+      <div className="flex flex-row justify-center items-center">
+        <Link href={{
+          pathname: "/user",
+          query: {
+            seal
+          }
+        }}
+        >
+          <Button
+            type="button"
+          >
+            My Profile
+          </Button>
+        </Link>
+        <form onSubmit={handleSubmit(handleFormFileUpload)} className="flex flex-row justify-center items-center">
+          <FormInputField
+            name={UPLOAD_FIELD_NAME}
+            type="file"
+            accept=".csv"
+            registerProps={register(UPLOAD_FIELD_NAME)}
+          />
+          <Button type="submit" disabled={!watch(UPLOAD_FIELD_NAME)?.length}>Upload</Button>
+        </form>
+      </div>
       <div className="overflow-x-auto w-full max-w-7xl flex flex-col">
         <table className="table-auto border-separate border-spacing-2  border border-slate-400">
           <thead>
@@ -67,30 +92,6 @@ const Page: NextPage<PageProps> = ({ users, seal }) => {
             ))}
           </tbody>
         </table>
-      </div>
-      <div className="flex flex-row justify-center items-center">
-        <Link href={{
-          pathname: "/user",
-          query: {
-            seal
-          }
-        }}
-        >
-          <Button
-            type="button"
-          >
-            My Profile
-          </Button>
-        </Link>
-        <form onSubmit={handleSubmit(handleFormFileUpload)} className="flex flex-row justify-center items-center">
-          <FormInputField
-            name={UPLOAD_FIELD_NAME}
-            type="file"
-            accept=".csv"
-            registerProps={register(UPLOAD_FIELD_NAME)}
-          />
-          <Button type="submit" disabled={!watch(UPLOAD_FIELD_NAME)?.length}>Upload</Button>
-        </form>
       </div>
     </div>
   );

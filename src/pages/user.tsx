@@ -45,14 +45,14 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
     window.location.reload();
   };
   return (
-    <div>
-      <span>
+    <div className="flex flex-col justify-center items-center mt-[20px]">
+      <span className="font-bold mb-5">
         Welcome
         {" "}
         {name.toUpperCase()}
         !
       </span>
-      <table>
+      <table className="mb-5">
         <tbody>
           <tr>
             <td>ID: </td>
@@ -88,11 +88,12 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
           </tr>
         </tbody>
       </table>
-      <div>
+      <div className="flex flex-row justify-between">
         <Button
           type="button"
           onClick={handleDownloadDataset}
           disabled={isLoading || downloadCount >= maxDownloadCount}
+          className="m-2"
         >
           Download Dataset
         </Button>
@@ -106,6 +107,7 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
           >
             <Button
               type="button"
+              className="m-2"
             >
               Manage Users
             </Button>

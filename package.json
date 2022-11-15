@@ -1,6 +1,6 @@
 {
   "name": "datamine",
-  "version": "0.1.1668492910053",
+  "version": "0.1.1668493793071",
   "private": true,
   "scripts": {
     "prepare": "yarn db:reset",
@@ -23,6 +23,7 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
+    "clsx": "^1.2.1",
     "dotenv": "^16.0.3",
     "iron-session": "^6.3.1",
     "lodash": "^4.17.21",
