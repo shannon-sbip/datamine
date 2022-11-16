@@ -4,9 +4,9 @@ import {
   GetServerSidePropsResult,
   NextApiHandler
 } from "next";
-import { ironOptions } from "../config";
+import { IRON_OPTIONS } from "../config";
 export function withSessionRoute(handler: NextApiHandler) {
-  return withIronSessionApiRoute(handler, ironOptions);
+  return withIronSessionApiRoute(handler, IRON_OPTIONS);
 }
 // Theses types are compatible with InferGetStaticPropsType
 // https://nextjs.org/docs/basic-features/data-fetching#typescript-use-getstaticprops
@@ -18,5 +18,5 @@ export function withSessionSsr<
     context: GetServerSidePropsContext,
   ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
 ) {
-  return withIronSessionSsr(handler, ironOptions);
+  return withIronSessionSsr(handler, IRON_OPTIONS);
 }

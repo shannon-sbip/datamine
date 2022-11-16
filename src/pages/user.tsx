@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import { useState } from "react";
+import downloadjs from "downloadjs";
 import getDownloadsFromDbByUserId from "../lib/getDownloadsFromDbByUserId";
 import getUnsealedData from "../lib/getUnsealedData";
 import getUserEventFromDbByUserId from "../lib/getUserEventFromDbByUserId";
@@ -33,7 +34,7 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
   } = user;
   const handleDownloadDataset = async () => {
     setIsLoading(true);
-    await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/v1/dataset`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/v1/dataset`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -41,8 +42,11 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
       body: JSON.stringify({
         seal
       })
-    });
-    window.location.reload();
+    }) || {};
+    const { data } = await response?.json() || {};
+    const { url } = data || {};
+    downloadjs(url);
+    setTimeout(() => window.location.reload(), 1000);
   };
   return (
     <div className="flex flex-col justify-center items-center mt-[20px]">

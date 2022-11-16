@@ -1,8 +1,14 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import downloadjs from "downloadjs";
 import UserPage from "../../pages/user";
 import { USER_ACTIVE } from "../constants";
+jest.mock("downloadjs");
+global.fetch = jest.fn().mockResolvedValue({
+  status: 201,
+  json: () => Promise.resolve({ data: { url: "url" } })
+});
 const userStory = `
 Given a valid user, with a valid magic link, and a valid download count,
 When user navigates to the web page through the magic link,
@@ -39,5 +45,6 @@ describe(userStory, () => {
         seal: "my-seal"
       })
     });
+    expect(downloadjs).toHaveBeenCalledWith("url");
   });
 });

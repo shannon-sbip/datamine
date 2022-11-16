@@ -1,9 +1,9 @@
 {
   "name": "datamine",
-  "version": "0.1.1668564328440",
+  "version": "0.1.1668581872634",
   "private": true,
   "scripts": {
-    "prepare": "yarn global add dotenv-cli && yarn db:reset",
+    "prepare": "yarn global add dotenv-cli && alias dotenv='$HOME/.config/yarn/global/node_modules/.bin/dotenv' && yarn db:reset",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -20,12 +20,15 @@
     "magiclink": "dotenv -e .env.local -- node ./scripts/get-magic-link.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.211.0",
+    "@aws-sdk/s3-request-presigner": "^3.211.0",
     "@prisma/client": "^4.5.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
     "clsx": "^1.2.1",
     "dotenv": "^16.0.3",
+    "downloadjs": "^1.4.7",
     "iron-session": "^6.3.1",
     "lodash": "^4.17.21",
     "next": "13.0.2",
@@ -39,6 +42,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/downloadjs": "^1.4.3",
     "@types/jest": "^29.2.2",
     "@types/lodash": "^4.14.188",
     "@types/papaparse": "^5.3.5",

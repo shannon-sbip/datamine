@@ -42,7 +42,7 @@ const handler = async (
       res.status(201).json({
         message: "Success.",
         data: {
-          url: getS3Url()
+          url: await getS3Url()
         }
       });
     } else {
