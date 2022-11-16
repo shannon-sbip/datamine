@@ -32,7 +32,7 @@ describe("/manage-user", () => {
               validFrom: user.validFrom.getTime(),
               validTo: user.validTo.getTime(),
               isAdmin: user.isAdmin
-            })))([ADMIN, USER_ACTIVE_WITH_0_MAX_DOWNLOADS, USER_ACTIVE])
+            })))([USER_ACTIVE_WITH_0_MAX_DOWNLOADS, USER_ACTIVE, ADMIN])
           }
         });
       });

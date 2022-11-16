@@ -27,23 +27,27 @@ export const GET_DOWNLOADS_BY_USER = (userId: string) => PRISMA.downloadEvent.fi
   }
 });
 export const SET_INITIAL_DB_STATE = () => PRISMA.userEvent.deleteMany()
-  .then(() => Promise.all([
-    PRISMA.userEvent.create({
-      data: ADMIN
-    }),
-    PRISMA.userEvent.create({
-      data: USER_ACTIVE
-    }),
-    PRISMA.userEvent.create({
-      data: USER_INACTIVE
-    }),
-    PRISMA.userEvent.create({
-      data: USER_ACTIVE_WITH_0_MAX_DOWNLOADS
-    }),
-    PRISMA.userEvent.create({
-      data: USER_EXPIRED
-    })
-  ]))
+  .then(() => {
+    const promises = [
+      PRISMA.userEvent.create({
+        data: ADMIN
+      }),
+      PRISMA.userEvent.create({
+        data: USER_ACTIVE
+      }),
+      PRISMA.userEvent.create({
+        data: USER_INACTIVE
+      }),
+      PRISMA.userEvent.create({
+        data: USER_ACTIVE_WITH_0_MAX_DOWNLOADS
+      }),
+      PRISMA.userEvent.create({
+        data: USER_EXPIRED
+      })
+    ] as Promise<unknown>[];
+    const promiseChain = promises.slice(1).reduce((chain, promise) => chain.then(() => promise), promises[0]);
+    return promiseChain;
+  })
   .then(() => PRISMA.userEvent.findMany())
   .then((result) => {
     expect(result.length).toEqual(5);

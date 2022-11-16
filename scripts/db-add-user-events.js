@@ -9,7 +9,8 @@ const promises = data.map((datum) => prisma.userEvent.create({
     validTo: new Date(datum.validTo)
   }
 }));
-Promise.all(promises)
+const promiseChain = promises.slice(1).reduce((chain, promise) => chain.then(() => promise), promises[0]);
+promiseChain
   .then(() => {
     console.log("Populated User Event table.");
   })
