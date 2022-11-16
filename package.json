@@ -1,9 +1,9 @@
 {
   "name": "datamine",
-  "version": "0.1.1668502980845",
+  "version": "0.1.1668561458702",
   "private": true,
   "scripts": {
-    "prepare": "yarn db:reset",
+    "prepare": "yarn global add dotenv-cli && yarn db:reset",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
