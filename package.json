@@ -1,10 +1,10 @@
 {
   "name": "datamine",
-  "version": "0.1.1668581872634",
+  "version": "0.1.1668585864592",
   "private": true,
   "scripts": {
-    "prepare": "yarn global add dotenv-cli && alias dotenv='$HOME/.config/yarn/global/node_modules/.bin/dotenv' && yarn db:reset",
-    "dev": "next dev",
+    "setup": "yarn setup:dotenv && yarn setup:localstack && yarn && yarn db:reset",
+    "dev": "yarn setup && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint -d .",
@@ -17,6 +17,8 @@
     "db:migrate": "dotenv -e .env.local -- yarn prisma migrate dev",
     "db:populate": "dotenv -e .env.local -- node ./scripts/db-add-user-events.js",
     "db:reset": "dotenv -e .env.local -- yarn prisma migrate reset && yarn db:populate",
+    "setup:dotenv": "yarn global add dotenv-cli && alias dotenv='$HOME/.config/yarn/global/node_modules/.bin/dotenv'",
+    "setup:localstack": "dotenv -e .env.local -- node ./scripts/localstack.js",
     "magiclink": "dotenv -e .env.local -- node ./scripts/get-magic-link.js"
   },
   "dependencies": {
