@@ -23,7 +23,7 @@ _Events represent the past and act as the source of truth; they are stored in da
 
 The domain of __```Datamine```__ is as follows:
 
-<img src="./doc/strategic-design.png" alt="system-design" width="400"/>
+<img src="./doc/strategic-design.png" alt="system-design" width="500"/>
 
 | Events        | Objects       | Transactions
 | ---           | ---           | ---
@@ -42,10 +42,8 @@ Based on the events and objects identified in the _Strategic Design_ stage, the 
 ```
 POST /api/v1/login/       # body: { email: string }
 POST /api/v1/user/update  # body: { ...<user_attributes> }
-GET /api/v1/user/?email={string}
-GET /api/v1/dataset/
 ```
-The endpoinds are derived from the needs of the personas identified in the _Strategic Design_ stage.
+The endpoinds are derived from the needs of the personas identified in the _Strategic Design_ stage. The webapp will focus on server-side rendering any user content, while exposing API endpoints that are required by client-side during user interaction.
 ### __Capacity Estimation__ (Data Storage)
 
 * __Int__: 4 bytes
