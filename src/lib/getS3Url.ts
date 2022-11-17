@@ -5,7 +5,7 @@ const getS3Url = async () => {
   const { s3Client } = AWS_CLIENTS;
   const { Bucket, Key } = DATASET_PARAMS;
   const signedUrl = await getSignedUrl(s3Client, new GetObjectCommand({ Bucket, Key }), {
-    expiresIn: 3
+    expiresIn: Number(process.env.S3_PRESIGNED_EXPIRY_DURATION || 3)
   });
   return signedUrl;
 };
