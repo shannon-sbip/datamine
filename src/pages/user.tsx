@@ -45,7 +45,7 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
     const { data } = await response?.json() || {};
     const { url } = data || {};
     downloadjs(url);
-    setTimeout(() => window.location.reload(), 1000);
+    // setTimeout(() => window.location.reload(), 1000);
   };
   return (
     <div className="flex flex-col justify-center items-center mt-[20px]">
