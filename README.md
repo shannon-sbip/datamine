@@ -49,17 +49,17 @@ The endpoinds are derived from the needs of the personas identified in the _Stra
 * __Int__: 4 bytes
 * __Char__: 2 byte * size
 * __Bool__: 1 byte
-* __UserEvent__: (32 bytes * 2 * 4) + (4 bytes * 4) + 2 bytes = 274 bytes
-* __DownloadEvent__: (32 bytes * 2 * 2) + 4 bytes = 132 bytes
+* __UserEvent__: (191 size * 2 bytes * 4) + (4 bytes * 4) + 2 bytes = 1546 bytes
+* __DownloadEvent__: (191 size * 2 bytes * 2) + 4 bytes = 768 bytes
 
 Assuming _100_ user updates per day, the database growth rate can be calculated as follows:
 
-* 100 * (274 + 132) bytes
-= __40.6KB / day__
+* 100 * (1546 + 768) bytes
+= __231.4 KB / day__
 
 By using Planet Scale database service, there is 5GB of storage available in the free tier:
 
-* 5,000,000 KB / 40.6 KB = ~120,000 days = __~300 years sustained usage__
+* 5,000,000 KB / 231.4 KB = ~21,600 days = __~60 years sustained usage__
 
 ### __Cost Estimation__
 
@@ -159,7 +159,7 @@ Ensure you have the latest stable version installed for _[Node](https://nodejs.o
 [Optional] You have installed [LocalStack](https://github.com/localstack/localstack) using ```pip```.
 
 [Optional] You have the following extensions/plugins in your IDE installed:
-_```ESLint, GitLens, Prisma, Tailwind CSS IntelliSense, CSS Modules, SQLite Viewer```_
+_```ESLint, GitLens, Prisma, Tailwind CSS IntelliSense, CSS Modules```_
 
 Clone the repository into your chosen directory and run the following commands:
 ```
@@ -169,6 +169,9 @@ yarn
 // Run all the tests in the project
 // These tests should be run often as you develop on it, to catch bugs early.
 yarn test
+
+// Start a local MySQL instance using Docker.
+yarn db:start
 
 // Start the development server. There will be some setup scripts executed before the dev server starts.
 // App is usually hosted on http://localhost:3000

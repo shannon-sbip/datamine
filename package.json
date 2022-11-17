@@ -1,6 +1,6 @@
 {
   "name": "datamine",
-  "version": "0.1.1668648720768",
+  "version": "0.1.1668658547785",
   "private": true,
   "scripts": {
     "setup": "yarn setup:dotenv && yarn setup:localstack && yarn && yarn db:reset",
@@ -10,10 +10,11 @@
     "lint": "next lint -d .",
     "lint:fix": "next lint -d . --fix",
     "update-version": "node scripts/update-version.js",
-    "test": "yarn test:frontend && yarn test:server-side-props && yarn test:backend",
+    "test": "yarn db:reset && yarn test:frontend && yarn test:server-side-props && yarn test:backend",
     "test:frontend": "dotenv -e .env.local -- jest -c jest.frontend.config.js -i src/tests/ui/",
     "test:backend": "dotenv -e .env.local -- jest -c jest.backend.config.js -i src/tests/api/ --runInBand",
     "test:server-side-props": "dotenv -e .env.local -- jest -c jest.frontend.config.js -i src/tests/server-side-props/",
+    "db:start": "docker run --name datamine -p 3309:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql",
     "db:migrate": "dotenv -e .env.local -- yarn prisma migrate dev",
     "db:populate": "dotenv -e .env.local -- node ./scripts/db-add-user-events.js",
     "db:reset": "dotenv -e .env.local -- yarn prisma migrate reset && yarn db:populate",
