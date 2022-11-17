@@ -184,7 +184,7 @@ yarn dev
 localstack start -d
 ```
 
-There are predefined users loaded into the database and you may inspect the database file at ```/prisma/data/dev.sqlite```, or refer to ```/src/tests/data/userEvent.json```.
+There are predefined users loaded into the database and you may inspect the data file at ```/src/tests/data/userEvent.json```.
 You may choose any of the valid users defined there to login to the application locally. For instance, you may use ```admin@example.com```.
 
 As the application requires interacting with external Amazon services, those functions are either stub out or depend on LocalStack when developing locally. Important information needed for development can be found in the console where ```yarn dev``` was run. For instance, the login flow will print the _magic link_ onto the console for you to interact with it locally.
