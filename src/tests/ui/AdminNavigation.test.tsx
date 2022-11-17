@@ -12,7 +12,6 @@ Then admin navigates to the manage users page
 describe(userStory, () => {
   beforeEach(() => {
     render(<UserPage user={{
-      id: ADMIN.userId,
       email: ADMIN.email,
       name: ADMIN.name,
       affilation: ADMIN.affilation,
@@ -27,7 +26,7 @@ describe(userStory, () => {
   });
   it("shows the profile.", () => {
     expect(screen.getByText(`Welcome ${ADMIN.name.toUpperCase()}!`)).toBeInTheDocument();
-    expect(screen.getByText(ADMIN.userId)).toBeInTheDocument();
+    expect(screen.getByText(ADMIN.email)).toBeInTheDocument();
     expect(screen.getByText(ADMIN.email)).toBeInTheDocument();
     expect(screen.getByText(ADMIN.affilation)).toBeInTheDocument();
     expect(screen.getByText(ADMIN.maxDownloadCount)).toBeInTheDocument();

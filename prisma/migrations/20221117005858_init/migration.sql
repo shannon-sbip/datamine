@@ -1,7 +1,6 @@
 -- CreateTable
 CREATE TABLE "UserEvent" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "userId" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -16,6 +15,6 @@ CREATE TABLE "UserEvent" (
 -- CreateTable
 CREATE TABLE "DownloadEvent" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "userId" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

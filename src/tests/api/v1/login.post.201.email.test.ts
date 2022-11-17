@@ -28,7 +28,7 @@ describe("/login", () => {
         await loginApi(req, res);
         expect(sealData).toHaveBeenCalledWith({
           eventId: USER_ACTIVE.id,
-          userId: USER_ACTIVE.userId
+          email: USER_ACTIVE.email
         }, {
           password: process.env.SEAL_PASSWORD
         });

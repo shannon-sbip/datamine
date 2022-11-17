@@ -1,8 +1,8 @@
 import { unsealData } from "iron-session";
 const getUnsealedData = async (userSeal: string) => {
-  const { userId, eventId } = (
+  const { email, eventId } = (
         await unsealData(userSeal, { password: process.env.SEAL_PASSWORD || "" }) || {}
-      ) as { userId: string, eventId: string};
-  return { userId, eventId };
+      ) as { email: string, eventId: string};
+  return { email, eventId };
 };
 export default getUnsealedData;

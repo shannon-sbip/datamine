@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import getS3Url from "../../../lib/getS3Url";
 import getUnsealedData from "../../../lib/getUnsealedData";
-import getUserEventFromDbByUserId from "../../../lib/getUserEventFromDbByUserId";
+import getUserEventFromDbByEmail from "../../../lib/getUserEventFromDbByEmail";
 import postDownloadEvent from "../../../lib/postDownloadEvent";
 type Data = {
   message: string
@@ -22,8 +22,8 @@ const handler = async (
     return;
   }
   try {
-    const { userId, eventId } = await getUnsealedData(userSeal);
-    const currentUser = await getUserEventFromDbByUserId(prisma, userId);
+    const { email, eventId } = await getUnsealedData(userSeal);
+    const currentUser = await getUserEventFromDbByEmail(prisma, email);
     if (!currentUser || currentUser.id !== eventId) {
       res.status(404).json({ message: "Seal is invalid. Please generate a new magic link." });
       return;

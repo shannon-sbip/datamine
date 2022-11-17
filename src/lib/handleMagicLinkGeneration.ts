@@ -33,7 +33,7 @@ const handleMagicLinkGeneration = async ({
     return;
   }
   const newSeal = await sealData({
-    userId: currentUser.userId,
+    email: currentUser.email,
     eventId: currentUser.id
   }, {
     password: process.env.SEAL_PASSWORD || ""

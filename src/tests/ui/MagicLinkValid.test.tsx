@@ -10,7 +10,6 @@ Then user sees the profile
 describe(userStory, () => {
   beforeEach(() => {
     render(<UserPage user={{
-      id: USER_ACTIVE.userId,
       email: USER_ACTIVE.email,
       name: USER_ACTIVE.name,
       affilation: USER_ACTIVE.affilation,
@@ -25,7 +24,6 @@ describe(userStory, () => {
   });
   it("shows the profile.", () => {
     expect(screen.getByText(`Welcome ${USER_ACTIVE.name.toUpperCase()}!`)).toBeInTheDocument();
-    expect(screen.getByText(USER_ACTIVE.userId)).toBeInTheDocument();
     expect(screen.getByText(USER_ACTIVE.email)).toBeInTheDocument();
     expect(screen.getByText(USER_ACTIVE.affilation)).toBeInTheDocument();
     expect(screen.getByText(USER_ACTIVE.maxDownloadCount)).toBeInTheDocument();

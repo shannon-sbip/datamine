@@ -6,7 +6,7 @@ import Papa from "papaparse";
 import { useState } from "react";
 import getDistinctUsersFromDb from "../lib/getDistinctUsersFromDb";
 import getUnsealedData from "../lib/getUnsealedData";
-import getUserEventFromDbByUserId from "../lib/getUserEventFromDbByUserId";
+import getUserEventFromDbByEmail from "../lib/getUserEventFromDbByEmail";
 import { User } from "../types/user";
 import Button from "../ui/Button";
 import FormInputField from "../ui/FormInputField";
@@ -71,7 +71,7 @@ const Page: NextPage<PageProps> = ({ users, seal }) => {
         <table className="table-auto border-separate border-spacing-2  border border-slate-400">
           <thead>
             <tr className="font-bold">
-              <th className="border border-slate-300 px-1">ID</th>
+              <th className="border border-slate-300 px-1">EMAIL</th>
               <th className="border border-slate-300 px-1">NAME</th>
               <th className="border border-slate-300 px-1">AFFILATION</th>
               <th className="border border-slate-300 px-1">IS ADMIN</th>
@@ -81,10 +81,10 @@ const Page: NextPage<PageProps> = ({ users, seal }) => {
           </thead>
           <tbody>
             {users.map(({
-              id, name, affilation, isAdmin, validFrom, validTo
+              email, name, affilation, isAdmin, validFrom, validTo
             }) => (
-              <tr key={id}>
-                <td className="border border-slate-300">{id}</td>
+              <tr key={email}>
+                <td className="border border-slate-300">{email}</td>
                 <td className="border border-slate-300">{name}</td>
                 <td className="border border-slate-300">{affilation}</td>
                 <td className="border border-slate-300">{isAdmin ? "TRUE" : "FALSE"}</td>
@@ -107,7 +107,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
     };
   }
   const unsealData = await getUnsealedData(seal);
-  const userEvent = await getUserEventFromDbByUserId(prisma, unsealData.userId);
+  const userEvent = await getUserEventFromDbByEmail(prisma, unsealData.email);
   if (userEvent?.id !== unsealData.eventId || !userEvent.isAdmin) {
     return {
       notFound: true

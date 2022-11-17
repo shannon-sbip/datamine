@@ -19,7 +19,6 @@ describe(userStory, () => {
   beforeEach(() => {
     render(<UserPage
       user={{
-        id: USER_ACTIVE.userId,
         email: USER_ACTIVE.email,
         name: USER_ACTIVE.name,
         affilation: USER_ACTIVE.affilation,

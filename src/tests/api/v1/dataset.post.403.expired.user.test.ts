@@ -13,7 +13,7 @@ describe("/dataset", () => {
   let json: {};
   beforeEach(async () => {
     jest.spyOn(ironSession, "unsealData").mockResolvedValue({
-      userId: USER_EXPIRED.userId,
+      email: USER_EXPIRED.email,
       eventId: USER_EXPIRED.id
     });
     json = jest.fn().mockReturnValue(null);
@@ -37,13 +37,13 @@ describe("/dataset", () => {
         const res = {
           status
         };
-        expect((await GET_DOWNLOADS_BY_USER(USER_EXPIRED.userId)).length).toEqual(0);
+        expect((await GET_DOWNLOADS_BY_USER(USER_EXPIRED.email)).length).toEqual(0);
         // @ts-ignore
         await datasetApi(req, res);
         expect(unsealData).toHaveBeenCalledWith(USER_SEAL, {
           password: process.env.SEAL_PASSWORD
         });
-        expect((await GET_DOWNLOADS_BY_USER(USER_EXPIRED.userId)).length).toEqual(0);
+        expect((await GET_DOWNLOADS_BY_USER(USER_EXPIRED.email)).length).toEqual(0);
         expect(getS3Url).not.toHaveBeenCalled();
         expect(status).toHaveBeenCalledWith(403);
         expect(json).toHaveBeenCalledWith({

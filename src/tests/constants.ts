@@ -19,10 +19,10 @@ export const GET_USER_EVENT_BY_EMAIL = (email: string) => PRISMA.userEvent.findM
   }
 });
 export const GET_USER_EVENTS = () => PRISMA.userEvent.findMany();
-export const GET_DOWNLOADS_BY_USER = (userId: string) => PRISMA.downloadEvent.findMany({
+export const GET_DOWNLOADS_BY_USER = (email: string) => PRISMA.downloadEvent.findMany({
   where: {
-    userId: {
-      equals: userId
+    email: {
+      equals: email
     }
   }
 });

@@ -13,7 +13,6 @@ describe(userStory, () => {
     render(<ManageUsersPage
       users={[
         {
-          id: ADMIN.userId,
           email: ADMIN.email,
           name: ADMIN.name,
           affilation: ADMIN.affilation,
@@ -22,7 +21,6 @@ describe(userStory, () => {
           validTo: ADMIN.validTo.getTime()
         },
         {
-          id: USER_ACTIVE.userId,
           email: USER_ACTIVE.email,
           name: USER_ACTIVE.name,
           affilation: USER_ACTIVE.affilation,
@@ -35,13 +33,13 @@ describe(userStory, () => {
     />);
   });
   it("shows the list of current users.", () => {
-    expect(screen.getByText(ADMIN.userId)).toBeInTheDocument();
+    expect(screen.getByText(ADMIN.email)).toBeInTheDocument();
     expect(screen.getByText(ADMIN.name)).toBeInTheDocument();
     expect(screen.getByText(ADMIN.affilation)).toBeInTheDocument();
     expect(screen.getByText("TRUE")).toBeInTheDocument();
     expect(screen.getByText(ADMIN.validFrom.toISOString())).toBeInTheDocument();
     expect(screen.getByText(ADMIN.validTo.toISOString())).toBeInTheDocument();
-    expect(screen.getByText(USER_ACTIVE.userId)).toBeInTheDocument();
+    expect(screen.getByText(USER_ACTIVE.email)).toBeInTheDocument();
     expect(screen.getByText(USER_ACTIVE.name)).toBeInTheDocument();
     expect(screen.getByText(USER_ACTIVE.affilation)).toBeInTheDocument();
     expect(screen.getByText("FALSE")).toBeInTheDocument();

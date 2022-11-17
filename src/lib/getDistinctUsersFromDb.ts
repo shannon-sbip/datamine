@@ -10,7 +10,7 @@ const getDistinctUsersFromDb = async (prisma: PrismaClient): Promise<Partial<Use
   });
   const now = (new Date()).getTime();
   const users = userEvents.reduce((acc, {
-    userId, name, affilation, email, isActive, isAdmin, validFrom, validTo
+    name, affilation, email, isActive, isAdmin, validFrom, validTo
   }) => {
     if (!isActive) {
       return acc;
@@ -21,7 +21,6 @@ const getDistinctUsersFromDb = async (prisma: PrismaClient): Promise<Partial<Use
     ];
     if (now >= range[0] && now <= range[1]) {
       acc.push({
-        id: userId,
         email,
         name,
         affilation,

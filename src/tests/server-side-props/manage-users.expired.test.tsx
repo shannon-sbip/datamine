@@ -8,7 +8,7 @@ describe("/manage-users", () => {
     describe("WHEN a request is made by an expired user", () => {
       it("THEN page not found", async () => {
         jest.spyOn(ironSession, "unsealData").mockResolvedValue({
-          userId: USER_EXPIRED.userId,
+          email: USER_EXPIRED.email,
           eventId: USER_EXPIRED.id
         });
         const { unsealData } = ironSession;

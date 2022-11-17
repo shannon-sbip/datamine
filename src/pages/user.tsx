@@ -3,9 +3,9 @@ import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import { useState } from "react";
 import downloadjs from "downloadjs";
-import getDownloadsFromDbByUserId from "../lib/getDownloadsFromDbByUserId";
+import getDownloadsFromDbByEmail from "../lib/getDownloadsFromDbByEmail";
 import getUnsealedData from "../lib/getUnsealedData";
-import getUserEventFromDbByUserId from "../lib/getUserEventFromDbByUserId";
+import getUserEventFromDbByEmail from "../lib/getUserEventFromDbByEmail";
 import type { User } from "../types/user";
 import Button from "../ui/Button";
 type PageProps = {
@@ -22,7 +22,6 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
     );
   }
   const {
-    id,
     email,
     name,
     affilation,
@@ -58,10 +57,6 @@ const Page: NextPage<PageProps> = ({ user, seal }) => {
       </span>
       <table className="mb-5">
         <tbody>
-          <tr>
-            <td>ID: </td>
-            <td>{id}</td>
-          </tr>
           <tr>
             <td>Email: </td>
             <td>{email}</td>
@@ -132,7 +127,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
     };
   }
   const unsealData = await getUnsealedData(seal);
-  const userEvent = await getUserEventFromDbByUserId(prisma, unsealData.userId);
+  const userEvent = await getUserEventFromDbByEmail(prisma, unsealData.email);
   if (userEvent?.id !== unsealData.eventId) {
     return {
       props: {
@@ -152,12 +147,11 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
       }
     };
   }
-  const downloads = await getDownloadsFromDbByUserId(prisma, userEvent.userId);
+  const downloads = await getDownloadsFromDbByEmail(prisma, userEvent.email);
   return {
     props: {
       seal,
       user: {
-        id: userEvent.userId,
         email: userEvent.email,
         name: userEvent.name,
         affilation: userEvent.affilation,

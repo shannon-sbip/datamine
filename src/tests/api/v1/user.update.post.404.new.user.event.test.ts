@@ -7,7 +7,7 @@ describe("/user/update", () => {
   let status: {};
   beforeEach(async () => {
     jest.spyOn(ironSession, "unsealData").mockResolvedValue({
-      userId: USER_ACTIVE.userId,
+      email: USER_ACTIVE.email,
       eventId: "some_old_id"
     });
     status = jest.fn().mockReturnValue({ json: () => null });

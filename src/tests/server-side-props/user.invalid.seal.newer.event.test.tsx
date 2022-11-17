@@ -8,7 +8,7 @@ describe("/user", () => {
     describe("WHEN a request is made with an invalid seal", () => {
       it("THEN no user profile is sent to client", async () => {
         jest.spyOn(ironSession, "unsealData").mockResolvedValue({
-          userId: USER_ACTIVE.userId,
+          email: USER_ACTIVE.email,
           eventId: "some_old_id"
         });
         const { unsealData } = ironSession;

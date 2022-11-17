@@ -1,12 +1,12 @@
 import { PrismaClient } from "@prisma/client";
-const getUserEventFromDbByUserId = (prisma: PrismaClient, userId: string) => prisma.userEvent.findFirst({
+const getUserEventFromDbByEmail = (prisma: PrismaClient, email: string) => prisma.userEvent.findFirst({
   where: {
-    userId: {
-      equals: userId
+    email: {
+      equals: email
     }
   },
   orderBy: {
     createdAt: "desc"
   }
 });
-export default getUserEventFromDbByUserId;
+export default getUserEventFromDbByEmail;
