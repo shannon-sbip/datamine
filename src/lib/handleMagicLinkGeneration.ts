@@ -43,13 +43,19 @@ const handleMagicLinkGeneration = async ({
     // eslint-disable-next-line no-console
     console.log(magicLink);
   }
-  postEmail(
+  const response = await postEmail(
     {
       email: currentUser.email,
       subject: "Magic Link",
-      Body: `Hey there ${currentUser.name}, <a href="${magicLink}">click here to login</a>.`
+      body: `Hey there ${currentUser.name}, <a href="${magicLink}">click here to login</a>.`
     }
   );
-  res.status(201).json({ message: `Magic Link has been sent to ${currentUser.email}` });
+  if (response.$metadata.httpStatusCode === 200) {
+    res.status(201).json({
+      message: `Magic Link has been sent to ${currentUser.email}.`
+    });
+  } else {
+    res.status(500).json({ message: "Something went wrong with the email service" });
+  }
 };
 export default handleMagicLinkGeneration;

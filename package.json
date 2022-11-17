@@ -1,6 +1,6 @@
 {
   "name": "datamine",
-  "version": "0.1.1668658662995",
+  "version": "0.1.1668670061812",
   "private": true,
   "scripts": {
     "setup": "yarn setup:dotenv && yarn setup:localstack && yarn && yarn db:reset",
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.211.0",
+    "@aws-sdk/client-ses": "^3.212.0",
     "@aws-sdk/s3-request-presigner": "^3.211.0",
     "@prisma/client": "^4.5.0",
     "@types/node": "18.11.9",

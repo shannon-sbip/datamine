@@ -2,8 +2,15 @@ import { sealData } from "iron-session";
 import loginApi from "../../../pages/api/v1/login";
 import postEmail from "../../../lib/postEmail";
 import { USER_ACTIVE } from "../../constants";
+jest.mock("../../../lib/postEmail", () => ({
+  __esModule: true,
+  default: jest.fn().mockResolvedValue({
+    $metadata: {
+      httpStatusCode: 200
+    }
+  })
+}));
 jest.mock("iron-session");
-jest.mock("../../../lib/postEmail");
 describe("/login", () => {
   let status: {};
   beforeEach(async () => {

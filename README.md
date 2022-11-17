@@ -166,16 +166,16 @@ Clone the repository into your chosen directory and run the following commands:
 // Install dependencies and setup the project.
 yarn
 
-// Run all the tests in the project
-// These tests should be run often as you develop on it, to catch bugs early.
-yarn test
-
 // Start a local MySQL instance using Docker.
 yarn db:start
 
 // Start the development server. There will be some setup scripts executed before the dev server starts.
 // App is usually hosted on http://localhost:3000
 yarn dev
+
+// Run all the tests in the project
+// These tests should be run often as you develop on it, to catch bugs early.
+yarn test
 ```
 ```
 // Start LocalStack in the background in a separate terminal
