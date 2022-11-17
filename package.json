@@ -1,6 +1,6 @@
 {
   "name": "datamine",
-  "version": "0.1.1668670061812",
+  "version": "0.1.1668671021708",
   "private": true,
   "scripts": {
     "setup": "yarn setup:dotenv && yarn setup:localstack && yarn && yarn db:reset",

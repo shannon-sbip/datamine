@@ -20,7 +20,7 @@ const handler = async (
       res
     });
   } catch (e) {
-    res.status(500).json({ message: "Something went wrong." });
+    res.status(500).json({ message: `Something went wrong. (${JSON.stringify(e)})` });
   }
 };
 export default handler;
