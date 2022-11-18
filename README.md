@@ -1,6 +1,8 @@
 # Datamine
 This is a project that leverages on Magic Links to distribute datasets to pre-approved entities.
 
+Check it out [here](https://datam1ne.vercel.app/)!
+
 ## Table of Contents
 -----
 1. [System Design](#System-Design)
@@ -149,6 +151,24 @@ __B6__: Upon clicking on a valid Magic Link, the user will be directed to the ad
 
 __B7__: User uploads csv file containing the list of users who can download the dataset.
 
+## Product Walkthrough
+-----
+<img src="./doc/walkthrough.png" alt="walkthrough" width="1000"/>
+
+__1__: User visits the WebApp and enters their email address.
+
+__2__: User checks their inbox for the Magic Link.
+
+__3__: User uses the Magic Link to login to the WebApp and is greeted with their profile page. This is where they can choose to download the dataset. If they are Admins, they can navigate to the Admin page to manage the users.
+
+__4__: The Manage Users page shows the table of all currently active users. Admins can choose to update or add new users using the upload option. The format of the CSV file is as follows:
+| email | name | affilation | maxDownloadCount | validFrom | validTo | isActive | isAdmin
+| --- | --- | --- | --- | --- | --- | --- | ---
+| _string_ | _string_ | _string_ | _number_ | _number_ | _number_ | _true / false_ | _true / false_ 
+
+Note that the __validFrom__ and __validTo__ fields are _unix timestamps_ in _milliseconds_.
+
+View a video of the walkthrough [here](https://youtu.be/A14_bz01IxI)!
 ## Development
 -----
 
@@ -156,37 +176,42 @@ __B7__: User uploads csv file containing the list of users who can download the 
 
 Ensure you have the latest stable version installed for _[Node](https://nodejs.org/en/), [Python3 & pip](https://www.python.org/downloads/), and [Docker](https://www.docker.com/)_.
 
-[Optional] You have installed [LocalStack](https://github.com/localstack/localstack) using ```pip```.
+[ Optional ] You have installed _[LocalStack](https://github.com/localstack/localstack)_ using _```pip```_.
 
-[Optional] You have the following extensions/plugins in your IDE installed:
+[ Optional ] You have the following extensions/plugins in your IDE installed:
 _```ESLint, GitLens, Prisma, Tailwind CSS IntelliSense, CSS Modules```_
 
 Clone the repository into your chosen directory and run the following commands:
 ```
 // Install dependencies and setup the project.
+
 yarn
 
 // Start LocalStack in the background in a separate terminal
 // Note that you may have to add the binary to your path. (~/.local/bin/localstack)
 // LocalStack is not mandatory for local development, but is needed for simulating the downloading of dataset.
+
 yarn localstack:start
 
 // Start a local MySQL instance using Docker.
+
 yarn db:start
 
 // Start the development server. There will be some setup scripts executed before the dev server starts.
 // App is usually hosted on http://localhost:3000
+
 yarn dev
 
 // Run all the tests in the project
 // These tests should be run often as you develop on it, to catch bugs early.
+
 yarn test
 ```
 
 There are predefined users loaded into the database and you may inspect the data file at ```/src/tests/data/userEvent.json```.
 You may choose any of the valid users defined there to login to the application locally. For instance, you may use ```admin@example.com```.
 
-As the application requires interacting with external Amazon services, those functions are either stub out or depend on LocalStack when developing locally. Important information needed for development can be found in the console where ```yarn dev``` was run. For instance, the login flow will print the _magic link_ onto the console for you to interact with it locally.
+As the application requires interacting with external Amazon services, those functions are either stub out or depend on _LocalStack_ when developing locally. Important information needed for development can be found in the console where ```yarn dev``` was run. For instance, the login flow will print the _magic link_ onto the console for you to interact with it locally.
 
 In case you wish to reset the local database, you may restart the dev server by running ```yarn dev``` again.
 
