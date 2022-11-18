@@ -166,6 +166,11 @@ Clone the repository into your chosen directory and run the following commands:
 // Install dependencies and setup the project.
 yarn
 
+// Start LocalStack in the background in a separate terminal
+// Note that you may have to add the binary to your path. (~/.local/bin/localstack)
+// LocalStack is not mandatory for local development, but is needed for simulating the downloading of dataset.
+yarn localstack:start
+
 // Start a local MySQL instance using Docker.
 yarn db:start
 
@@ -176,12 +181,6 @@ yarn dev
 // Run all the tests in the project
 // These tests should be run often as you develop on it, to catch bugs early.
 yarn test
-```
-```
-// Start LocalStack in the background in a separate terminal
-// Note that you may have to add the binary to your path. (~/.local/bin/localstack)
-// LocalStack is not mandatory for local development, but is needed for simulating the downloading of dataset.
-localstack start -d
 ```
 
 There are predefined users loaded into the database and you may inspect the data file at ```/src/tests/data/userEvent.json```.
