@@ -21,7 +21,7 @@ describe(userStory, () => {
     const user = userEvent.setup();
     const emailInput = screen.getByRole("textbox");
     await user.type(emailInput, "unvalidated-email@email.com");
-    const submitButton = screen.getByRole("button");
+    const submitButton = screen.getByRole("button", { name: "Submit" });
     await user.click(submitButton);
     expect(screen.getByText("The email you entered does not exist in our database.")).toBeInTheDocument();
   });
