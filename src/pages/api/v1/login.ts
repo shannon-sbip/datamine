@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
+import handleMagicLink from "../../../lib/handleMagicLink";
 import handleMagicLinkGeneration from "../../../lib/handleMagicLinkGeneration";
 type Data = {
   message: string
@@ -14,6 +15,17 @@ const handler = async (
     return;
   }
   try {
+    const { seal } = req.query || {};
+    const userSeal = seal ? String(seal) : "";
+    if (userSeal) {
+      await handleMagicLink({
+        prisma,
+        userSeal,
+        req,
+        res
+      });
+      return;
+    }
     await handleMagicLinkGeneration({
       prisma,
       req,
