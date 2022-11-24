@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { get } from "lodash";
 import type { NextApiRequest, NextApiResponse } from "next";
 import handleMagicLink from "../../../lib/handleMagicLink";
 import handleMagicLinkGeneration from "../../../lib/handleMagicLinkGeneration";
@@ -32,7 +33,13 @@ const handler = async (
       res
     });
   } catch (e) {
-    res.status(500).json({ message: `Something went wrong. (${JSON.stringify(e)})` });
+    if (process.env.NODE_ENV === "development" && get(e, "errno") === -111) {
+      res.status(201).json({
+        message: "LocalStack is not running. Check the server console for the magic link."
+      });
+    } else {
+      res.status(500).json({ message: `Something went wrong. (${JSON.stringify(e)})` });
+    }
   }
 };
 export default handler;

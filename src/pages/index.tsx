@@ -10,14 +10,32 @@ import LandingCallToAction from "../ui/LandingCallToAction";
 import LandingBannerTop from "../ui/LandingBannerTop";
 import LandingBannerBottom from "../ui/LandingBannerBottom";
 import LandingSection from "../ui/LandingSection";
+const APP_LOGIN_VIEW = "APP_LOGIN_VIEW";
+const APP_MAGIC_LINK_VIEW = "APP_MAGIC_LINK_VIEW";
+const APP_INVALID_EMAIL_VIEW = "APP_INVALID_EMAIL_VIEW";
+const APP_PROFILE_VIEW = "APP_PROFILE_VIEW";
+const APP_MANAGE_USERS_VIEW = "APP_MANAGE_USERS_VIEW";
+type APP_VIEW =
+  typeof APP_LOGIN_VIEW
+  | typeof APP_MAGIC_LINK_VIEW
+  | typeof APP_INVALID_EMAIL_VIEW
+  | typeof APP_PROFILE_VIEW
+  | typeof APP_MANAGE_USERS_VIEW
 const Home = () => {
-  const [magicLinkRequestStatusCode, setMagicLinkRequestStatusCode] = useState<number | null>(null);
+  const [view, setView] = useState<APP_VIEW>(APP_LOGIN_VIEW);
   const {
     handleSubmit, register, watch
   } = useForm();
   const onSubmit = async (event: FieldValues) => {
     const response = await submitEmail(event.email);
-    setMagicLinkRequestStatusCode(response.status);
+    switch (response.status) {
+      case 201:
+        return setView(APP_MAGIC_LINK_VIEW);
+      case 404:
+        return setView(APP_INVALID_EMAIL_VIEW);
+      default:
+        return setView(APP_LOGIN_VIEW);
+    }
   };
   return (
     <div
@@ -30,11 +48,16 @@ const Home = () => {
       <LandingCallToAction />
       <div className={styles.container}>
         {(() => {
-          switch (magicLinkRequestStatusCode) {
-            case 201:
+          switch (view) {
+            case APP_MAGIC_LINK_VIEW:
               return <span>Your magic link has been sent to your inbox.</span>;
-            case 404:
+            case APP_INVALID_EMAIL_VIEW:
               return <span>The email you entered does not exist in our database.</span>;
+            case APP_PROFILE_VIEW:
+              return null;
+            case APP_MANAGE_USERS_VIEW:
+              return null;
+            case APP_LOGIN_VIEW:
             default:
               return (
                 <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
