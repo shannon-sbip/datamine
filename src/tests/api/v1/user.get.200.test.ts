@@ -8,7 +8,7 @@ describe("/user", () => {
   let json: {};
   beforeEach(async () => {
     jest.spyOn(ironSession, "unsealData").mockResolvedValue({
-      userId: USER_ACTIVE.userId,
+      email: USER_ACTIVE.email,
       eventId: USER_ACTIVE.id
     });
     json = jest.fn().mockReturnValue(null);
@@ -41,7 +41,6 @@ describe("/user", () => {
         expect(json).toHaveBeenCalledWith({
           message: "Success.",
           data: {
-            id: USER_ACTIVE.userId,
             email: USER_ACTIVE.email,
             name: USER_ACTIVE.name,
             affilation: USER_ACTIVE.affilation,

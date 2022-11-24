@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
-import getDownloadsFromDbByUserId from "../../../../lib/getDownloadsFromDbByUserId";
+import getDownloadsFromDbByEmail from "../../../../lib/getDownloadsFromDbByEmail";
 import getUnsealedData from "../../../../lib/getUnsealedData";
-import getUserEventFromDbByUserId from "../../../../lib/getUserEventFromDbByUserId";
+import getUserEventFromDbByEmail from "../../../../lib/getUserEventFromDbByEmail";
 import { User } from "../../../../types/user";
 type Data = {
   message: string
@@ -20,8 +20,8 @@ const handler = async (
     return;
   }
   try {
-    const { userId, eventId } = await getUnsealedData(userSeal);
-    const currentUser = await getUserEventFromDbByUserId(prisma, userId);
+    const { email, eventId } = await getUnsealedData(userSeal);
+    const currentUser = await getUserEventFromDbByEmail(prisma, email);
     if (!currentUser || currentUser.id !== eventId) {
       res.status(404).json({ message: "Seal is invalid. Please generate a new magic link." });
       return;
@@ -35,11 +35,10 @@ const handler = async (
       res.status(403).json({ message: "User is currently not able to access the data." });
       return;
     }
-    const downloads = await getDownloadsFromDbByUserId(prisma, currentUser.userId);
+    const downloads = await getDownloadsFromDbByEmail(prisma, currentUser.email);
     res.status(200).json({
       message: "Success.",
       data: {
-        id: currentUser.userId,
         email: currentUser.email,
         name: currentUser.name,
         affilation: currentUser.affilation,

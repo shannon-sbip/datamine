@@ -8,7 +8,7 @@ describe("/login", () => {
   let status: {};
   beforeEach(async () => {
     jest.spyOn(ironSession, "unsealData").mockResolvedValue({
-      userId: USER_ACTIVE.userId,
+      email: USER_ACTIVE.email,
       eventId: USER_ACTIVE.id
     });
     status = jest.fn().mockReturnValue({ json: () => null });
