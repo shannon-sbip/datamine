@@ -46,7 +46,7 @@ const sectionContent = [
   }
 ];
 const LandingSection: FC = () => (
-  <section className="flex flex-col bg-white border-b p-8 justify-center items-center text-justify">
+  <section className="flex flex-col bg-white border-b p-8 justify-center items-center">
     <div className="max-w-[1980px]">
       {sectionContent.map(({
         title, items, node, opposite

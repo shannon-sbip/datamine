@@ -39,7 +39,7 @@ const Home = () => {
   };
   return (
     <div
-      className={clsx(styles.gradient, "leading-normal tracking-normal text-white overflow-x-hidden")}
+      className={clsx(styles.gradient, "leading-normal tracking-normal text-white overflow-x-hidden text-lg")}
     >
       <LandingHero />
       <LandingBannerTop />
