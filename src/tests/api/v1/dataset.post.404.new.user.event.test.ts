@@ -24,7 +24,7 @@ describe("/user", () => {
           headers: {
             cookie: ""
           },
-          session: {
+          query: {
           }
         };
         const res = {

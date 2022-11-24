@@ -5,22 +5,25 @@ const USER_SEAL = "USER_SEAL";
 describe("/user", () => {
   let status: {};
   beforeEach(async () => {
-    jest.spyOn(ironSession, "unsealData").mockResolvedValue(null);
+    jest.spyOn(ironSession, "unsealData").mockResolvedValue({
+      userId: "unknown_user",
+      eventId: "some_id"
+    });
     status = jest.fn().mockReturnValue({ json: () => null });
   });
   describe("GIVEN a list of users", () => {
-    describe("WHEN a GET request is made with an invalid seal", () => {
+    describe("WHEN a POST request is made with a seal containing a user that do not exist", () => {
       it("THEN the status code returns 404", async () => {
         const { unsealData } = ironSession;
         const req = {
-          method: "GET",
+          method: "POST",
           body: {
             seal: USER_SEAL
           },
           headers: {
             cookie: ""
           },
-          session: {
+          query: {
           }
         };
         const res = {

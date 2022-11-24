@@ -26,8 +26,6 @@ describe("/login", () => {
           },
           headers: {
             cookie: ""
-          },
-          session: {
           }
         };
         const res = {

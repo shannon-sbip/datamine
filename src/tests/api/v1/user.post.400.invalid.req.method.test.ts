@@ -1,18 +1,22 @@
 import userApi from "../../../pages/api/v1/user";
+import { USER_ACTIVE } from "../../constants";
 describe("/user", () => {
   let status: {};
   beforeEach(async () => {
     status = jest.fn().mockReturnValue({ json: () => null });
   });
   describe("GIVEN an active user", () => {
-    describe("WHEN a GET request is made without a seal", () => {
+    describe("WHEN a POST request is made", () => {
       it("THEN the status code returns 400", async () => {
         const req = {
-          method: "GET",
+          method: "POST",
+          body: {
+            email: USER_ACTIVE.email
+          },
           headers: {
             cookie: ""
           },
-          session: {
+          query: {
           }
         };
         const res = {

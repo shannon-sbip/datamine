@@ -13,18 +13,18 @@ describe("/user", () => {
     status = jest.fn().mockReturnValue({ json: () => null });
   });
   describe("GIVEN an active user", () => {
-    describe("WHEN a GET request is made with a seal containing an old event", () => {
+    describe("WHEN a POST request is made with a seal containing an old event", () => {
       it("THEN the status code returns 404", async () => {
         const { unsealData } = ironSession;
         const req = {
-          method: "GET",
+          method: "POST",
           body: {
             seal: USER_ACTIVE_SEAL
           },
           headers: {
             cookie: ""
           },
-          session: {
+          query: {
           }
         };
         const res = {

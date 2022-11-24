@@ -1,6 +1,6 @@
 import * as ironSession from "iron-session";
 import userApi from "../../../pages/api/v1/user";
-import { USER_EXPIRED } from "../../constants";
+import { USER_ACTIVE } from "../../constants";
 jest.mock("iron-session");
 const USER_SEAL = "USER_SEAL";
 describe("/user", () => {
@@ -8,25 +8,25 @@ describe("/user", () => {
   let json: {};
   beforeEach(async () => {
     jest.spyOn(ironSession, "unsealData").mockResolvedValue({
-      email: USER_EXPIRED.email,
-      eventId: USER_EXPIRED.id
+      email: USER_ACTIVE.email,
+      eventId: USER_ACTIVE.id
     });
     json = jest.fn().mockReturnValue(null);
     status = jest.fn().mockReturnValue({ json });
   });
   describe("GIVEN a list of users", () => {
-    describe("WHEN a GET request is made by an expired user", () => {
-      it("THEN the status code returns 403", async () => {
+    describe("WHEN a POST request is made with a valid seal", () => {
+      it("THEN the status code returns 200, and the user profile is sent to client", async () => {
         const { unsealData } = ironSession;
         const req = {
-          method: "GET",
+          method: "POST",
           body: {
             seal: USER_SEAL
           },
           headers: {
             cookie: ""
           },
-          session: {
+          query: {
           }
         };
         const res = {
@@ -37,9 +37,19 @@ describe("/user", () => {
         expect(unsealData).toHaveBeenCalledWith(USER_SEAL, {
           password: process.env.SEAL_PASSWORD
         });
-        expect(status).toHaveBeenCalledWith(403);
+        expect(status).toHaveBeenCalledWith(200);
         expect(json).toHaveBeenCalledWith({
-          message: "User is currently not able to access the data."
+          message: "Success.",
+          data: {
+            email: USER_ACTIVE.email,
+            name: USER_ACTIVE.name,
+            affilation: USER_ACTIVE.affilation,
+            downloadCount: 0,
+            maxDownloadCount: USER_ACTIVE.maxDownloadCount,
+            validFrom: USER_ACTIVE.validFrom.getTime(),
+            validTo: USER_ACTIVE.validTo.getTime(),
+            isAdmin: USER_ACTIVE.isAdmin
+          }
         });
       });
     });

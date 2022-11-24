@@ -31,7 +31,7 @@ describe("/dataset", () => {
           headers: {
             cookie: ""
           },
-          session: {
+          query: {
           }
         };
         const res = {

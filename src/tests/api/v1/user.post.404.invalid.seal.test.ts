@@ -1,8 +1,8 @@
 import * as ironSession from "iron-session";
-import userUpdateApi from "../../../pages/api/v1/user/update";
+import userApi from "../../../pages/api/v1/user";
 jest.mock("iron-session");
 const USER_SEAL = "USER_SEAL";
-describe("/user/update", () => {
+describe("/user", () => {
   let status: {};
   beforeEach(async () => {
     jest.spyOn(ironSession, "unsealData").mockResolvedValue(null);
@@ -27,7 +27,7 @@ describe("/user/update", () => {
           status
         };
           // @ts-ignore
-        await userUpdateApi(req, res);
+        await userApi(req, res);
         expect(unsealData).toHaveBeenCalledWith(USER_SEAL, {
           password: process.env.SEAL_PASSWORD
         });
