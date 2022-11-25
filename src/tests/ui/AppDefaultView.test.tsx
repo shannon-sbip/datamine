@@ -11,6 +11,6 @@ describe(userStory, () => {
     render(<App />);
   });
   it("shows the static information.", () => {
-    expect(screen.getByText("Enter your email to recieve your magic link.")).toBeInTheDocument();
+    expect(screen.getByText("Food(lg) for food intake monitoring and disease management")).toBeInTheDocument();
   });
 });

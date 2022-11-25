@@ -9,6 +9,7 @@ global.fetch = jest.fn().mockResolvedValue({
 const userStory = `
 Given no inital state,
 When user navigates to the web page,
+and opens modal,
 and enters an unverified email,
 and clicks submit,
 Then user sees an error message.
@@ -19,6 +20,7 @@ describe(userStory, () => {
   });
   it("shows the error message", async () => {
     const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Download now" }));
     const emailInput = screen.getByRole("textbox");
     await user.type(emailInput, "unvalidated-email@email.com");
     const submitButton = screen.getByRole("button", { name: "Submit" });

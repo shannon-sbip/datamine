@@ -9,6 +9,7 @@ global.fetch = jest.fn().mockResolvedValue({
 const userStory = `
 Given no inital state,
 When user navigates to the web page,
+and opens modal,
 and enters email,
 and clicks submit,
 Then user sees the statement to check inbox.
@@ -19,6 +20,7 @@ describe(userStory, () => {
   });
   it("shows the statement to check inbox.", async () => {
     const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Download now" }));
     const emailInput = screen.getByRole("textbox");
     await user.type(emailInput, "validated-email@email.com");
     const submitButton = screen.getByRole("button", { name: "Submit" });
