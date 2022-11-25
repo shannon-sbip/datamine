@@ -1,9 +1,40 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Papa from "papaparse";
-import ManageUsersPage from "../../pages/manage-users";
-import { USER_ACTIVE } from "../constants";
+import App from "../../pages/index";
+import { ADMIN, USER_ACTIVE } from "../constants";
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: () => ({
+    query: {
+      seal: "seal"
+    }
+  }),
+  default: ({ children }: { children: ReactNode[] }) => children
+}));
+global.fetch = jest.fn()
+  .mockResolvedValueOnce({
+    status: 200,
+    json: () => Promise.resolve({
+      data: {
+        email: ADMIN.email,
+        name: ADMIN.name,
+        affilation: ADMIN.affilation,
+        isActive: ADMIN.isActive,
+        downloadCount: 0,
+        maxDownloadCount: ADMIN.maxDownloadCount,
+        validFrom: ADMIN.validFrom.getTime(),
+        validTo: ADMIN.validTo.getTime(),
+        isAdmin: ADMIN.isAdmin
+      }
+    })
+  }).mockResolvedValueOnce({
+    status: 200,
+    json: () => Promise.resolve({
+      data: []
+    })
+  });
 const userStory = `
 Given an admin,
 When admin navigates to the manage user web page,
@@ -12,11 +43,10 @@ Then a POST request is made with the new users.
 `;
 describe(userStory, () => {
   it("triggers the correct POST request", async () => {
-    const { container } = render(<ManageUsersPage
-      users={[]}
-      seal="my-seal"
-    />);
+    const { container } = render(<App />);
     const user = userEvent.setup();
+    await waitFor(() => expect(screen.getByText(`Welcome ${ADMIN.name.toUpperCase()}!`)).toBeInTheDocument());
+    await user.click(screen.getByRole("button", { name: "Manage Users" }));
     const usersToUpload = [
       {
         email: USER_ACTIVE.email,
@@ -51,7 +81,7 @@ describe(userStory, () => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            seal: "my-seal",
+            seal: "seal",
             users: usersToUpload
           })
         })

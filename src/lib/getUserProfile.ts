@@ -1,4 +1,5 @@
-const getUserProfile = async (seal: string) => {
+import { User } from "../types/user";
+const getUserProfile = async (seal: string): Promise<User> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/v1/user`, {
     method: "POST",
     headers: {
