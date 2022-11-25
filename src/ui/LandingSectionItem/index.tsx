@@ -22,7 +22,7 @@ const LandingSectionItem: FC<{
           ))}
         </div>
         )}
-        <div className="w-full sm:w-1/2 p-6">
+        <div className="flex w-full sm:w-1/2 p-6 items-center">
           {node}
         </div>
         { opposite && (

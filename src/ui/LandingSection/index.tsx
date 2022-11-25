@@ -21,7 +21,7 @@ const sectionContent = [
       "We build Food(lg) to calculate daily nutrient estimates with the journaled entries for achieving a well-balanced diet. Powered by a deep-learning framework, and based on standard nutritional guidelines, Food(lg) has been used successfully in Ng Teng Fong General Hospital to help patients with prediabetes. It can be downloaded on the APP Store [link: https://apps.apple.com/us/app/food-lg/id1213299378] or Google Play [link: https://play.google.com/store/apps/details?id=com.nusidmi.foodlg&hl=en_SG]. Alternatively, you can view on Desktop [link: https://foodlgweb.nusidmi.com/tabs/home]. Watch this video [link: https://www.youtube.com/watch?v=MHp-saJiP-0] of Food(lg) if you want to know more details."
     ],
     node: <iframe
-      className="w-full h-full"
+      className="w-full h-full max-h-[277px]"
       src="https://www.youtube.com/embed/MHp-saJiP-0"
       title="YouTube video player"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -47,7 +47,7 @@ const sectionContent = [
 ];
 const LandingSection: FC = () => (
   <section className="flex flex-col bg-white border-b p-8 justify-center items-center">
-    <div className="max-w-[1980px]">
+    <div className="max-w-[1080px]">
       {sectionContent.map(({
         title, items, node, opposite
       }) => <LandingSectionItem key={title} title={title} items={items} node={node} opposite={opposite} />)}
