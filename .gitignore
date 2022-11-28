@@ -37,3 +37,5 @@ next-env.d.ts
 
 bootstrap-next-typescript
 prisma/data
+
+/scripts/personal
