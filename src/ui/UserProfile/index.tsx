@@ -14,7 +14,7 @@ type UserProfileProps = {
 const UserProfile: FC<UserProfileProps> = (props) => {
   const { seal, setView } = props;
   const [downloadLoading, setDownloadLoading] = useState(false);
-  const [userProfile, setUserProfile] = useState<User | null>(null);
+  const [userProfile, setUserProfile] = useState<User | null | undefined>(null);
   useEffect(() => {
     if (!seal) {
       return;
@@ -23,14 +23,14 @@ const UserProfile: FC<UserProfileProps> = (props) => {
       setUserProfile(await getUserProfile(seal));
     })();
   }, [seal]);
-  if (isEmpty(userProfile)) {
+  if (userProfile === undefined) {
     return (
       <div>
         This link is no longer valid, please generate a new Magic Link.
       </div>
     );
   }
-  if (!userProfile) {
+  if (userProfile === null) {
     return <span>Loading...</span>;
   }
   const {

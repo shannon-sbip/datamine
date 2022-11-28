@@ -56,7 +56,7 @@ const Modal: FC<ModalProps> = (props) => {
           "dark:bg-gray-900",
           "sm:my-8",
           "sm:align-middle",
-          "sm:max-w-7xl",
+          "sm:max-w-6xl",
           "sm:w-full",
           "sm:p-6"
         )}
