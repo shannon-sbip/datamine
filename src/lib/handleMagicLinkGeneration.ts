@@ -38,7 +38,7 @@ const handleMagicLinkGeneration = async ({
   }, {
     password: process.env.SEAL_PASSWORD || ""
   });
-  const magicLink = `${process.env.NEXT_PUBLIC_APP_URL}/user?seal=${newSeal}`;
+  const magicLink = `${process.env.APP_URL}/?seal=${newSeal}`;
   if (process.env.NODE_ENV === "development") {
     // eslint-disable-next-line no-console
     console.log(magicLink);
@@ -46,7 +46,7 @@ const handleMagicLinkGeneration = async ({
   const response = await postEmail(
     {
       email: currentUser.email,
-      subject: "Magic Link",
+      subject: "[no-reply] Food SG 233 Magic Link",
       body: `Hey there ${currentUser.name}, <a href="${magicLink}">click here to login</a>.`
     }
   );
