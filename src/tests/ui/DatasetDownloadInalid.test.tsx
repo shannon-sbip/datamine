@@ -30,11 +30,11 @@ global.fetch = jest.fn().mockResolvedValue({
 const userStory = `
 Given a valid user, with a valid magic link, and an invalid download count,
 When user navigates to the web page through the magic link,
-Then user sees a disabled Download Dataset button
+Then user sees a disabled Get Dataset Url button
 `;
 describe(userStory, () => {
   it("shows a disable button", async () => {
     render(<App />);
-    await waitFor(() => expect(screen.getByRole("button", { name: "Download Dataset" })).toBeDisabled());
+    await waitFor(() => expect(screen.getByRole("button", { name: "Get Dataset Url" })).toBeDisabled());
   });
 });

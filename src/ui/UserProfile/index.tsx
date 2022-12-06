@@ -1,7 +1,4 @@
-import Link from "next/link";
 import { FC, useEffect, useState } from "react";
-import downloadjs from "downloadjs";
-import { isEmpty } from "lodash";
 import type { User } from "../../types/user";
 import Button from "../Button";
 import getDatasetUrl from "../../lib/getDatasetUrl";
@@ -14,6 +11,7 @@ type UserProfileProps = {
 const UserProfile: FC<UserProfileProps> = (props) => {
   const { seal, setView } = props;
   const [downloadLoading, setDownloadLoading] = useState(false);
+  const [downloadUrl, setDownloadUrl] = useState("");
   const [userProfile, setUserProfile] = useState<User | null | undefined>(null);
   useEffect(() => {
     if (!seal) {
@@ -22,7 +20,7 @@ const UserProfile: FC<UserProfileProps> = (props) => {
     (async () => {
       setUserProfile(await getUserProfile(seal));
     })();
-  }, [seal]);
+  }, [seal, downloadUrl]);
   if (userProfile === undefined) {
     return (
       <div>
@@ -49,8 +47,7 @@ const UserProfile: FC<UserProfileProps> = (props) => {
     }
     setDownloadLoading(true);
     const url = await getDatasetUrl(seal);
-    downloadjs(url);
-    // setTimeout(() => window.location.reload(), 1000);
+    setDownloadUrl(url);
   };
   const handleManageUsersNavigation = () => setView(APP_MANAGE_USERS_VIEW);
   return (
@@ -94,14 +91,24 @@ const UserProfile: FC<UserProfileProps> = (props) => {
         </tbody>
       </table>
       <div className="flex flex-row justify-between">
+        {!downloadUrl && (
         <Button
           type="button"
           onClick={handleDownloadDataset}
           disabled={downloadLoading || downloadCount >= maxDownloadCount}
           className="m-2"
         >
-          Download Dataset
+          Get Dataset Url
         </Button>
+        )}
+        {downloadUrl && (
+        <Button
+          type="button"
+          className="m-2"
+        >
+          <a href={downloadUrl}>Download Now</a>
+        </Button>
+        )}
         {isAdmin && (
         <Button
           type="button"
