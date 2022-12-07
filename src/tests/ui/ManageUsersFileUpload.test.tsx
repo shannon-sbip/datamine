@@ -37,7 +37,7 @@ global.fetch = jest.fn()
   });
 const userStory = `
 Given an admin,
-When admin navigates to the manage user web page,
+When admin navigates to the manage user web view and update user view,
 And uploads a list of new users,
 Then a POST request is made with the new users.
 `;
@@ -47,6 +47,7 @@ describe(userStory, () => {
     const user = userEvent.setup();
     await waitFor(() => expect(screen.getByText(`Welcome ${ADMIN.name.toUpperCase()}!`)).toBeInTheDocument());
     await user.click(screen.getByRole("button", { name: "Manage Users" }));
+    await user.click(screen.getByRole("button", { name: "Update Users" }));
     const usersToUpload = [
       {
         email: USER_ACTIVE.email,
