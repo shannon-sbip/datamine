@@ -4,13 +4,14 @@ import styles from "./index.module.css";
 const FormInputField = (props: {
     name: string,
     label?: string,
+    ariaLabel?: string,
     type?: HTMLInputTypeAttribute,
     placeholder?: string,
     accept?: string,
     registerProps: UseFormRegisterReturn
   }) => {
   const {
-    name, label, placeholder, registerProps, type, accept
+    name, label, ariaLabel, placeholder, registerProps, type, accept
   } = props;
   const {
     ref,
@@ -32,6 +33,7 @@ const FormInputField = (props: {
         <input
           id={name}
           type={type}
+          aria-label={ariaLabel}
           placeholder={placeholder}
           ref={ref}
           onChange={onChange}

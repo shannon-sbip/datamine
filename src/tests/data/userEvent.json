@@ -17,8 +17,8 @@
       "name": "user_active",
       "affilation": "affilation2",
       "maxDownloadCount": 2,
-      "validFrom": 946656000002,
-      "validTo": 32503651200002,
+      "validFrom": 946656000000,
+      "validTo": 32503651200000,
       "isAdmin": false,
       "isActive": true
     },
