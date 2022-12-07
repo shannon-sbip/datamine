@@ -67,7 +67,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
         <FormInputField
           name="email"
           type="email"
-          label="Enter your email to recieve your magic link."
+          label="If you are already registered, enter your email to recieve your magic link."
           placeholder="Email..."
           registerProps={register("email")}
         />
