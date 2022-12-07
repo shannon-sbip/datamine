@@ -19,6 +19,7 @@ import {
 import LoginForm from "../ui/LoginForm";
 import ManageUser from "../ui/ManageUser";
 import Modal from "../ui/Modal";
+import LandingPublications from "../ui/LandingPublications";
 const Home = () => {
   const router = useRouter();
   const [view, setView] = useState<APP_VIEW_TYPE>(APP_LOGIN_VIEW);
@@ -43,6 +44,7 @@ const Home = () => {
       <LandingSection />
       <LandingBannerBottom />
       <LandingCallToAction openModal={handleModalOpen} />
+      <LandingPublications />
       {showModal && (
       <Modal onOutsideClick={handleModalClose}>
         <div className={styles.container}>
