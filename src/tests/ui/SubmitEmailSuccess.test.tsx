@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "../../pages/index";
 global.fetch = jest.fn().mockResolvedValue({
@@ -25,6 +25,8 @@ describe(userStory, () => {
     await user.type(emailInput, "validated-email@email.com");
     const submitButton = screen.getByRole("button", { name: "Submit" });
     await user.click(submitButton);
-    expect(screen.getByText("Your magic link has been sent to your inbox.")).toBeInTheDocument();
+    await waitFor(
+      () => screen.getByText(`${process.env.NEXT_PUBLIC_EMAIL_SOURCE}`)
+    );
   });
 });

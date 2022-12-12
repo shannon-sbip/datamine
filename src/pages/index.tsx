@@ -51,7 +51,16 @@ const Home = () => {
       <Modal onOutsideClick={handleModalClose}>
         <div className={styles.container}>
           {view && {
-            [APP_MAGIC_LINK_VIEW]: <span>Your magic link has been sent to your inbox.</span>,
+            [APP_MAGIC_LINK_VIEW]: (
+              <span>
+                Your magic link has been sent to your inbox, by
+                {" "}
+                <span className="font-bold underline">
+                  {process.env.NEXT_PUBLIC_EMAIL_SOURCE}
+                </span>
+                .
+              </span>
+            ),
             [APP_INVALID_EMAIL_VIEW]: <span>The email you entered does not exist in our database.</span>,
             [APP_PROFILE_VIEW]: <UserProfile seal={seal} setView={setView} />,
             [APP_MANAGE_USERS_VIEW]: <ManageUser seal={seal} setView={setView} />,

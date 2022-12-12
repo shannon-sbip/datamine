@@ -19,7 +19,7 @@ const sendEmailCommand = (toAddress: string, subject: string, body: string) => n
       Data: subject
     }
   },
-  Source: process.env.EMAIL_SOURCE,
+  Source: process.env.NEXT_PUBLIC_EMAIL_SOURCE,
   ReplyToAddresses: []
 });
 type PostEmailArgs = {

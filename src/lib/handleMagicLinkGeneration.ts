@@ -52,7 +52,7 @@ const handleMagicLinkGeneration = async ({
   );
   if (response.$metadata.httpStatusCode === 200) {
     res.status(201).json({
-      message: `Magic Link has been sent to ${currentUser.email}.`
+      message: `Magic Link has been sent to ${currentUser.email}, by ${process.env.NEXT_PUBLIC_EMAIL_SOURCE}.`
     });
   } else {
     res.status(500).json({ message: "Something went wrong with the email service" });
