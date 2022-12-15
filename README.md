@@ -42,8 +42,10 @@ Based on the events and objects identified in the _Strategic Design_ stage, the 
 
 ### __API Endpoints__
 ```
-POST /api/v1/login/       # body: { email: string }
-POST /api/v1/user/update  # body: { ...<user_attributes> }
+POST /api/v1/login/
+POST /api/v1/user/ 
+POST /api/v1/user/update
+POST /api/v1/dataset/
 ```
 The endpoinds are derived from the needs of the personas identified in the _Strategic Design_ stage. The webapp will focus on server-side rendering any user content, while exposing API endpoints that are required by client-side during user interaction.
 ### __Capacity Estimation__ (Data Storage)
@@ -69,8 +71,8 @@ __Assumptions:__
 - Developer team size: 1 pax
 - 100 daily active users
 - 100 user updates per day
-- 100 downloads per day
-- 1 compressed dataset of size 40 GB that never changes
+- 1 downloads per day
+- 1 compressed dataset of size 36 GB that never changes
 - 100 emails sent per day
 - 1 GB of monthly email data sent 
 
@@ -93,10 +95,11 @@ __[Amazon S3 Monthly Cost](https://calculator.aws/#/addService/S3)__
 
 | Type        | Calculation | Cost (per month)
 | ---         | --- | ---
-| Storage     | 40 GB * 0.025 USD | __1.00 USD__
+| Storage     | 36 GB * 0.025 USD | __1.00 USD__
 | PUT request | 1 PUT Request * 0.000005 USD per request | __0.00 USD__
-| GET request | (100 downloads per day) * (30 days) * (0.0000004 USD per request) | __0.0012 USD__
-| Total       | 1.00 USD + 0.0012 USD | __1.00 USD__
+| GET request | (1 downloads per day) * (30 days) * (0.0000004 USD per request) | __0.000012 USD__
+| Data Transfer     | (36 GB) * (30 days) x 0.12 USD | __129.60 USD__
+| Total       | 1.00 USD + 129.60 USD | __130.60 USD__
 
 __[Amazon SES Monthly Cost](https://calculator.aws/#/addService/SES)__
 
